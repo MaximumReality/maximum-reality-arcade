@@ -9,22 +9,29 @@
         body { background-color: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Press Start 2P', cursive; overflow: hidden; }
         .arcade-container { position: relative; width: 95vw; max-width: 800px; }
         
-        /* THE CABINET FRAME */
         .cabinet-shell { width: 100%; display: block; position: relative; z-index: 50; pointer-events: none; }
 
-        /* THE SCREEN */
+        /* THE SCREEN - Updated with your Pulse animations */
         .screen {
             position: absolute;
             top: 36.2%; left: 17.5%; width: 65%; height: 35.8%;
-            background: #000; overflow: hidden; border-radius: 8px; z-index: 1;
+            background: #000;
+            overflow: hidden;
+            border-radius: 8px;
+            z-index: 1;
+            /* Your Fourthwall Pulse logic applied here */
+            border: 2px solid #39ff14;
+            box-shadow: 0 0 20px #ff00ff inset;
+            animation: 
+                pulseGreen 4s ease-in-out infinite alternate,
+                pulseMagenta 4s ease-in-out infinite alternate 2s;
         }
 
-        /* LOCAL VIDEO - MATCHING: maximum_intro.mp4 */
         .intro-video {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover;
-            opacity: 0.65;
+            opacity: 0.7;
             z-index: 5;
         }
 
@@ -35,7 +42,6 @@
             background-size: 100% 4px; z-index: 10; pointer-events: none;
         }
 
-        /* THE LINKS */
         .credits-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -44,17 +50,36 @@
             animation: scrollUp 15s linear infinite;
         }
 
-        .credits-container:hover { animation-play-state: paused; }
-
+        /* Your Fourthwall Button Style modified for Arcade Links */
         .arcade-link {
-            color: #00ff00; text-decoration: none; font-size: 0.6rem;
-            margin: 20px 0; text-align: center;
-            text-shadow: 2px 2px #000, 0 0 10px #00ff00;
-            display: block; pointer-events: auto;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.55rem;
+            margin: 15px auto;
+            padding: 10px 15px;
+            text-align: center;
+            display: block;
+            width: fit-content;
+            background: linear-gradient(135deg, #8b5cf6, #a855f7);
+            border-radius: 999px;
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
+            transition: transform 0.15s ease;
         }
 
-        .arcade-link:hover { color: #fff; text-shadow: 0 0 15px #fff; }
+        .arcade-link:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px #39ff14;
+        }
 
+        /* KEYFRAMES FROM YOUR CODE */
+        @keyframes pulseGreen {
+            0% { border-color:#39ff14; }
+            100% { border-color:#7fff3f; }
+        }
+        @keyframes pulseMagenta {
+            0% { box-shadow:0 0 20px #ff00ff, 0 0 40px #ff00ff inset; }
+            100% { box-shadow:0 0 35px #ff00ff, 0 0 60px #ff00ff inset; }
+        }
         @keyframes scrollUp { 0% { transform: translateY(110%); } 100% { transform: translateY(-160%); } }
     </style>
 </head>
@@ -66,14 +91,12 @@
         <video class="intro-video" autoplay muted loop playsinline>
             <source src="maximum_intro.mp4" type="video/mp4">
         </video>
-        
         <div class="scanlines"></div>
-        
         <div class="credits-container">
-            <a href="#" target="_blank" class="arcade-link">1P: MAIN HUB</a>
-            <a href="#" target="_blank" class="arcade-link">2P: PROJECT VAULT</a>
-            <a href="#" target="_blank" class="arcade-link">HIGH SCORE: BLOG</a>
-            <a href="#" target="_blank" class="arcade-link">EXIT: CONTACT</a>
+            <a href="#" class="arcade-link">1P: PORTFOLIO</a>
+            <a href="#" class="arcade-link">2P: PROJECTS</a>
+            <a href="#" class="arcade-link">HIGH SCORE</a>
+            <a href="#" class="arcade-link">CONTACT</a>
         </div>
     </div>
 </div>
