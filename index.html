@@ -38,6 +38,28 @@
         #unmute-btn { left: 24%; }
         #mute-btn { right: 18%; }
 
+        /* FOOTER STYLING */
+.arcade-footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.4rem;
+    letter-spacing: 1px;
+    line-height: 1.5;
+    z-index: 300;
+}
+
+    /* COFFEE BUTTON GLOW */
+.coffee-link {
+    background: linear-gradient(135deg, #00f2fe, #4facfe) !important;
+    color: #000 !important;
+    font-weight: bold;
+    box-shadow: 0 0 15px #00f2fe !important;
+}
+
+        
         /* LINKS */
         .credits-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; z-index: 110; animation: scrollUp 40s linear infinite; }
         .arcade-link { color: #ffffff; text-decoration: none; font-size: 0.45rem; margin: 6px auto; padding: 8px 10px; text-align: center; display: block; width: 175px; background: linear-gradient(135deg, #8b5cf6, #a855f7); border-radius: 4px; box-shadow: 0 0 10px rgba(168, 85, 247, 0.6); transition: all 0.2s ease; text-transform: uppercase; letter-spacing: 1px; }
@@ -58,7 +80,7 @@
         <div id="mute-btn" class="hotspot" onclick="toggleAudio(true)"></div>
     </div>
 
-    <div class="screen">
+        <div class="screen">
         <video id="arcadeVideo" class="intro-video" autoplay muted playsinline>
             <source src="maximum_intro.mp4" type="video/mp4">
         </video>
@@ -67,6 +89,9 @@
         <div class="credits-container">
             <a href="https://youtube.com/@maximumrealitylori" target="_blank" class="arcade-link">1P: MAX REALITY TV</a>
             <a href="https://maximum-reality-shop.fourthwall.com/" target="_blank" class="arcade-link" style="background: linear-gradient(135deg, #ffcc00, #ff9900); color: #000;">SHOP: MERCH DROP</a>
+            
+            <a href="https://buymeacoffee.com/MaximumReality" target="_blank" class="arcade-link coffee-link">SUPPORT: BUY A COFFEE</a>
+
             <a href="https://maximumreality.github.io/Abduction/" target="_blank" class="arcade-link">START: ABDUCTION</a>
             <a href="https://codepen.io/Acidic-Jellybean/pen/GgZLxBy" target="_blank" class="arcade-link">AZUL: WORD GUESS</a>
             <a href="https://maximumreality.github.io/azul-story-cyoa/" target="_blank" class="arcade-link">AZUL: CYOA STORY</a>
@@ -75,6 +100,11 @@
             <a href="https://www.instagram.com/maximumrealitylori" target="_blank" class="arcade-link">SOCIAL: INSTAGRAM</a>
         </div>
     </div>
+</div> <div class="arcade-footer">
+    © 2025 LORI SIFUENTES | PART OF THE MAXIMUM REALITY UNIVERSE<br>
+    STAY GLITCHY. NO NICHE, JUST VIBES.
+</div>
+
 </div>
 
 <script>
