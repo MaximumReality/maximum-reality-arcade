@@ -24,21 +24,35 @@
         .intro-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.8; z-index: 101; }
 
         /* THE CABINET BUTTON HOTSPOTS */
-        .mute-toggle {
-            position: absolute;
-            bottom: 15%; /* Adjust these to line up with the physical buttons on your image */
-            width: 50px;
-            height: 70px;
-            background: rgba(255, 255, 255, 5); /* Transparent */
-            border-radius: 50%;
-            z-index: 200; /* On top of everything */
-            cursor: pointer;
-        }
+        <style>
+    /* This bar stays locked to the cabinet joysticks */
+    .button-container {
+        position: absolute;
+        bottom: 11%; /* The height of your physical buttons */
+        left: 10%;   /* Starts near the left edge */
+        width: 80%;  /* Stretches across the cabinet */
+        height: 70px;
+        display: flex;
+        justify-content: space-between; /* Pushes one to the far left, one to the far right */
+        z-index: 200;
+        pointer-events: none; /* Let clicks pass through the container itself */
+    }
 
-        /* Left Button: UNMUTE */
-        #unmute-btn { left: 50%; 
-        /* Right Button: MUTE */
-        #mute-btn { right: 45%;
+    .hotspot {
+        width: 70px;
+        height: 70px;
+        background: rgba(0, 255, 0, 0.3); /* Visible for testing - change to transparent later */
+        border-radius: 50%;
+        pointer-events: auto; /* Makes only the circles clickable */
+        cursor: pointer;
+    }
+</style>
+
+<div class="button-container">
+    <div id="unmute-btn" class="hotspot" onclick="toggleAudio(false)"></div>
+    
+    <div id="mute-btn" class="hotspot" onclick="toggleAudio(true)"></div>
+</div>
 
         .credits-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; z-index: 110; animation: scrollUp 15s linear infinite; }
         .arcade-link { color: #ffffff; text-decoration: none; font-size: 0.5rem; margin: 12px auto; padding: 8px 12px; text-align: center; display: block; width: fit-content; background: linear-gradient(135deg, #8b5cf6, #a855f7); border-radius: 999px; box-shadow: 0 0 10px rgba(168, 85, 247, 0.6); }
