@@ -24,18 +24,20 @@
 
         .intro-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.8; z-index: 101; }
 
-        /* THE BUTTON BAR */
-        .button-container {
-            position: absolute;
-            bottom: 11%; 
-            left: 15%;   
-            width: 70%;  
-            height: 70px;
-            display: flex;
-            justify-content: space-between; 
-            z-index: 200;
-            pointer-events: none; 
-        }
+        /* THE BUTTON BAR - FIXED CENTER LOGIC */
+.button-container {
+    position: absolute;
+    bottom: 11%; 
+    left: 0;   
+    width: 100%;  /* Now spans the whole width so we can center things */
+    height: 70px;
+    display: flex;
+    justify-content: center; /* Centers both buttons */
+    gap: 150px;              /* ADJUST THIS: Lower = Closer Together, Higher = Further Apart */
+    z-index: 200;
+    pointer-events: none; 
+}
+
 
         .hotspot {
             width: 70px;
