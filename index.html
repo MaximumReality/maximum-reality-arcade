@@ -24,16 +24,14 @@
             max-width: 800px;
         }
 
-        /* The Frame - MATCHING arcade.PNG */
         .cabinet-shell {
             width: 100%;
             display: block;
             position: relative;
-            z-index: 5;
-            pointer-events: none;
+            z-index: 10;
+            pointer-events: none; 
         }
 
-        /* The Screen Container */
         .screen {
             position: absolute;
             top: 36.2%; 
@@ -46,25 +44,31 @@
             z-index: 1;
         }
 
-        /* The Video - MATCHING maximum_intro.mp4 */
-        .intro-video {
+        /* YouTube Container */
+        .video-wrapper {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            opacity: 0.45;
+            opacity: 0.6; /* Blends the video into the cabinet */
             z-index: 2;
         }
 
-        /* Scanlines */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            /* Zooming slightly to fill the rectangular arcade screen */
+            transform: scale(1.4); 
+        }
+
         .scanlines {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
             background-size: 100% 4px;
-            z-index: 10;
+            z-index: 11;
             pointer-events: none;
         }
 
@@ -74,7 +78,7 @@
             flex-direction: column;
             justify-content: center;
             height: 100%;
-            z-index: 8;
+            z-index: 15;
             animation: scrollUp 15s linear infinite;
         }
 
@@ -105,11 +109,8 @@
             100% { transform: translateY(-150%); }
         }
 
-        /* Subtle CRT flicker */
         @keyframes flicker {
             0% { opacity: 0.98; }
-            5% { opacity: 1; }
-            10% { opacity: 0.97; }
             100% { opacity: 1; }
         }
         .screen { animation: flicker 0.15s infinite; }
@@ -121,15 +122,17 @@
     <img src="arcade.PNG" class="cabinet-shell">
 
     <div class="screen">
-        <video class="intro-video" autoplay muted loop playsinline>
-            <source src="maximum_intro.mp4" type="video/mp4">
-        </video>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/Y5x8DP7FE2U?autoplay=1&mute=1&loop=1&playlist=Y5x8DP7FE2U&controls=0&modestbranding=1&rel=0&iv_load_policy=3" 
+                    allow="autoplay; encrypted-media">
+            </iframe>
+        </div>
 
         <div class="scanlines"></div>
         
         <div class="credits-container">
-            <a href="#" target="_blank" class="arcade-link">1P: MAIN PORTFOLIO</a>
-            <a href="#" target="_blank" class="arcade-link">2P: PROJECT HUB</a>
+            <a href="https://github.com/yourusername" target="_blank" class="arcade-link">1P: MAIN HUB</a>
+            <a href="#" target="_blank" class="arcade-link">2P: PROJECT VAULT</a>
             <a href="#" target="_blank" class="arcade-link">HIGH SCORE: BLOG</a>
             <a href="#" target="_blank" class="arcade-link">BONUS: CREATIONS</a>
             <a href="#" target="_blank" class="arcade-link">EXIT: CONTACT</a>
