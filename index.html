@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAXIMUM REALITY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Press Start 2P', cursive; overflow: hidden; }
+        .arcade-container { position: relative; width: 95vw; max-width: 800px; }
+        .cabinet-shell { width: 100%; display: block; position: relative; z-index: 50; pointer-events: none; }
+
+        /* SCREEN: Fixed at 14.5% */
+        .screen {
+            position: absolute;
+            top: 36.2%; left: 14.5%; width: 71%; height: 32.8%;
+            background: #000; overflow: hidden; border-radius: 4px; z-index: 100;
+            border: 2px solid #39ff14;
+            box-shadow: 0 0 15px #ff00ff inset, 0 0 50px rgba(0,0,0,1) inset;
+            animation: pulseGreen 4s ease-in-out infinite alternate, pulseMagenta 4s ease-in-out infinite alternate 2s;
+        }
+
+        .intro-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.9; z-index: 101; filter: contrast(1.2) brightness(1.1); }
+
+        .scanlines {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 3px 100%;
+            z-index: 105; pointer-events: none; animation: crtFlicker 0.15s infinite;
+        }
+
+        @keyframes crtFlicker { 0% { opacity: 0.97; } 50% { opacity: 1; } 100% { opacity: 0.98; } }
+
+        /* BUTTONS */
+        .button-container { position: absolute; bottom: 11%; left: 0; width: 100%; height: 80px; z-index: 200; pointer-events: none; }
+        .hotspot { position: absolute; width: 80px; height: 80px; background: transparent; border-radius: 50%; pointer-events: auto; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+        #unmute-btn { left: 24%; }
+        #mute-btn { right: 18%; }
+
+        /* LINKS */
+        .credits-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; z-index: 110; animation: scrollUp 40s linear infinite; }
+        .arcade-link { color: #ffffff; text-decoration: none; font-size: 0.45rem; margin: 6px auto; padding: 8px 10px; text-align: center; display: block; width: 175px; background: linear-gradient(135deg, #8b5cf6, #a855f7); border-radius: 4px; box-shadow: 0 0 10px rgba(168, 85, 247, 0.6); transition: all 0.2s ease; text-transform: uppercase; letter-spacing: 1px; }
+        .arcade-link:hover { background: #39ff14; color: #000; box-shadow: 0 0 20px #39ff14; transform: scale(1.1); }
+
+        @keyframes pulseGreen { 0% { border-color:#39ff14; } 100% { border-color:#7fff3f; } }
+        @keyframes pulseMagenta { 0% { box-shadow:0 0 15px #ff00ff inset; } 100% { box-shadow:0 0 30px #ff00ff inset; } }
+        @keyframes scrollUp { 0% { transform: translateY(110%); } 100% { transform: translateY(-160%); } }
+    </style>
+</head>
+<body>
+
+<div class="arcade-container">
+    <img src="arcade.PNG" class="cabinet-shell">
+    
+    <div class="button-container">
+        <div id="unmute-btn" class="hotspot" onclick="toggleAudio(false)"></div>
+        <div id="mute-btn" class="hotspot" onclick="toggleAudio(true)"></div>
+    </div>
+
+    <div class="screen">
+        <video id="arcadeVideo" class="intro-video" autoplay muted playsinline>
+            <source src="maximum_intro.mp4" type="video/mp4">
+        </video>
+        <div class="scanlines"></div>
+
+        <div class="credits-container">
+            <a href="https://youtube.com/@maximumrealitylori" target="_blank" class="arcade-link">1P: MAX REALITY TV</a>
+            <a href="https://maximum-reality-shop.fourthwall.com/" target="_blank" class="arcade-link" style="background: linear-gradient(135deg, #ffcc00, #ff9900); color: #000;">SHOP: MERCH DROP</a>
+            <a href="https://maximumreality.github.io/Abduction/" target="_blank" class="arcade-link">START: ABDUCTION</a>
+            <a href="https://codepen.io/Acidic-Jellybean/pen/GgZLxBy" target="_blank" class="arcade-link">AZUL: WORD GUESS</a>
+            <a href="https://maximumreality.github.io/azul-story-cyoa/" target="_blank" class="arcade-link">AZUL: CYOA STORY</a>
+            <a href="https://maximumreality.github.io/Pulse/" target="_blank" class="arcade-link">BOOK: PULSE OF...</a>
+            <a href="https://www.tiktok.com/@zer0chick" target="_blank" class="arcade-link">SOCIAL: TIKTOK</a>
+            <a href="https://www.instagram.com/maximumrealitylori" target="_blank" class="arcade-link">SOCIAL: INSTAGRAM</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    const videoPlaylist = ["maximum_intro.mp4", "Abducted.mp4"];
+    let currentIdx = 0;
+    const player = document.getElementById('arcadeVideo');
+
+    player.onended = function() {
+        currentIdx = (currentIdx + 1) % videoPlaylist.length;
+        player.src = videoPlaylist[currentIdx];
+        player.play();
+    };
+
+    function toggleAudio(isMute) {
+        player.muted = isMute;
+        player.play();
+    }
+</script>
+
+</body>
+</html>
