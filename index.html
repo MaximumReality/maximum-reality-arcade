@@ -15,79 +15,101 @@
             margin: 0;
             font-family: 'Press Start 2P', cursive;
             color: #fff;
+            overflow: hidden;
         }
 
         .arcade-container {
             position: relative;
             width: 100%;
             max-width: 800px;
-            text-align: center;
         }
 
-        /* The background image you uploaded */
+        /* The Frame - MATCHING arcade.PNG */
         .cabinet-shell {
             width: 100%;
             display: block;
+            position: relative;
+            z-index: 5;
+            pointer-events: none;
         }
 
-        /* The interactive screen container */
+        /* The Screen Container */
         .screen {
             position: absolute;
-            top: 36.2%; /* Alignment for the black box */
+            top: 36.2%; 
             left: 17.5%;
             width: 65%;
             height: 35.8%;
             background: #000;
             overflow: hidden;
             border-radius: 8px;
-            box-shadow: inset 0 0 40px rgba(0, 255, 0, 0.1);
+            z-index: 1;
         }
 
-        /* Retro CRT Scanlines */
+        /* The Video - MATCHING maximum_intro.mp4 */
+        .intro-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.45;
+            z-index: 2;
+        }
+
+        /* Scanlines */
         .scanlines {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%),
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
-            background-size: 100% 4px, 3px 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
+            background-size: 100% 4px;
             z-index: 10;
             pointer-events: none;
         }
 
-        /* Scrolling Link Section */
         .credits-container {
+            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
             height: 100%;
+            z-index: 8;
             animation: scrollUp 15s linear infinite;
+        }
+
+        .credits-container:hover {
+            animation-play-state: paused;
         }
 
         .arcade-link {
             color: #00ff00;
             text-decoration: none;
-            font-size: 0.6rem;
-            margin: 20px 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px #000;
+            font-size: 0.65rem;
+            margin: 25px 0;
+            text-align: center;
+            text-shadow: 2px 2px #000, 0 0 8px #00ff00;
+            transition: all 0.2s;
+            display: block;
+            pointer-events: auto;
         }
 
         .arcade-link:hover {
             color: #fff;
-            text-shadow: 0 0 10px #00ff00;
+            transform: scale(1.1);
+            text-shadow: 0 0 15px #fff;
         }
 
         @keyframes scrollUp {
-            0% { transform: translateY(100%); }
-            100% { transform: translateY(-120%); }
+            0% { transform: translateY(110%); }
+            100% { transform: translateY(-150%); }
         }
 
-        /* CRT Flicker Effect */
+        /* Subtle CRT flicker */
         @keyframes flicker {
             0% { opacity: 0.98; }
-            10% { opacity: 1; }
-            20% { opacity: 0.99; }
+            5% { opacity: 1; }
+            10% { opacity: 0.97; }
             100% { opacity: 1; }
         }
         .screen { animation: flicker 0.15s infinite; }
@@ -99,13 +121,18 @@
     <img src="arcade.PNG" class="cabinet-shell">
 
     <div class="screen">
+        <video class="intro-video" autoplay muted loop playsinline>
+            <source src="maximum_intro.mp4" type="video/mp4">
+        </video>
+
         <div class="scanlines"></div>
+        
         <div class="credits-container">
-            <a href="#" class="arcade-link">1P: Main Portfolio</a>
-            <a href="#" class="arcade-link">2P: Social Media</a>
-            <a href="#" class="arcade-link">High Score: GitHub</a>
-            <a href="#" class="arcade-link">Insert Coin: Blog</a>
-            <a href="#" class="arcade-link">Game Over: Contact</a>
+            <a href="#" target="_blank" class="arcade-link">1P: MAIN PORTFOLIO</a>
+            <a href="#" target="_blank" class="arcade-link">2P: PROJECT HUB</a>
+            <a href="#" target="_blank" class="arcade-link">HIGH SCORE: BLOG</a>
+            <a href="#" target="_blank" class="arcade-link">BONUS: CREATIONS</a>
+            <a href="#" target="_blank" class="arcade-link">EXIT: CONTACT</a>
         </div>
     </div>
 </div>
