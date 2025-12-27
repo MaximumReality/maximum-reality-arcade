@@ -7,21 +7,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         body { background-color: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Press Start 2P', cursive; overflow: hidden; }
-        .arcade-container { position: relative; width: 95vw; max-width: 800px; }
+        .arcade-container { position: relative; width: 95vw; max-width: 800px; background: #000; }
         
-        .cabinet-shell { width: 100%; display: block; position: relative; z-index: 50; pointer-events: none; }
+        /* THE CABINET - Now the bottom layer */
+        .cabinet-shell { 
+            width: 100%; 
+            display: block; 
+            position: relative; 
+            z-index: 1; 
+        }
 
-        /* THE SCREEN - Updated with your Pulse animations */
+        /* THE SCREEN - Now the top layer */
         .screen {
             position: absolute;
             top: 36.2%; left: 17.5%; width: 65%; height: 35.8%;
             background: #000;
             overflow: hidden;
-            border-radius: 8px;
-            z-index: 1;
-            /* Your Fourthwall Pulse logic applied here */
+            border-radius: 4px;
+            z-index: 100; /* Forces it to the front */
+            
+            /* Your Fourthwall Pulse Glow */
             border: 2px solid #39ff14;
-            box-shadow: 0 0 20px #ff00ff inset;
+            box-shadow: 0 0 15px #ff00ff inset;
             animation: 
                 pulseGreen 4s ease-in-out infinite alternate,
                 pulseMagenta 4s ease-in-out infinite alternate 2s;
@@ -31,55 +38,43 @@
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover;
-            opacity: 0.7;
-            z-index: 5;
+            opacity: 0.8;
+            z-index: 101;
         }
 
         .scanlines {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%);
-            background-size: 100% 4px; z-index: 10; pointer-events: none;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
+            background-size: 100% 4px; 
+            z-index: 105; 
+            pointer-events: none;
         }
 
         .credits-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             display: flex; flex-direction: column; justify-content: center;
-            z-index: 100;
+            z-index: 110; /* Text is the very top layer */
             animation: scrollUp 15s linear infinite;
         }
 
-        /* Your Fourthwall Button Style modified for Arcade Links */
         .arcade-link {
             color: #ffffff;
             text-decoration: none;
-            font-size: 0.55rem;
-            margin: 15px auto;
-            padding: 10px 15px;
+            font-size: 0.5rem;
+            margin: 12px auto;
+            padding: 8px 12px;
             text-align: center;
             display: block;
             width: fit-content;
             background: linear-gradient(135deg, #8b5cf6, #a855f7);
             border-radius: 999px;
             box-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
-            transition: transform 0.15s ease;
         }
 
-        .arcade-link:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px #39ff14;
-        }
-
-        /* KEYFRAMES FROM YOUR CODE */
-        @keyframes pulseGreen {
-            0% { border-color:#39ff14; }
-            100% { border-color:#7fff3f; }
-        }
-        @keyframes pulseMagenta {
-            0% { box-shadow:0 0 20px #ff00ff, 0 0 40px #ff00ff inset; }
-            100% { box-shadow:0 0 35px #ff00ff, 0 0 60px #ff00ff inset; }
-        }
+        @keyframes pulseGreen { 0% { border-color:#39ff14; } 100% { border-color:#7fff3f; } }
+        @keyframes pulseMagenta { 0% { box-shadow:0 0 15px #ff00ff inset; } 100% { box-shadow:0 0 30px #ff00ff inset; } }
         @keyframes scrollUp { 0% { transform: translateY(110%); } 100% { transform: translateY(-160%); } }
     </style>
 </head>
@@ -87,6 +82,7 @@
 
 <div class="arcade-container">
     <img src="arcade.PNG" class="cabinet-shell">
+    
     <div class="screen">
         <video class="intro-video" autoplay muted loop playsinline>
             <source src="maximum_intro.mp4" type="video/mp4">
