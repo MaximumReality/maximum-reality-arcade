@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAXIMUM REALITY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Press Start 2P', cursive;
+            color: #fff;
+        }
+
+        .arcade-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        /* The background image you uploaded */
+        .cabinet-shell {
+            width: 100%;
+            display: block;
+        }
+
+        /* The interactive screen container */
+        .screen {
+            position: absolute;
+            top: 36.2%; /* Alignment for the black box */
+            left: 17.5%;
+            width: 65%;
+            height: 35.8%;
+            background: #000;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: inset 0 0 40px rgba(0, 255, 0, 0.1);
+        }
+
+        /* Retro CRT Scanlines */
+        .scanlines {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%),
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+            background-size: 100% 4px, 3px 100%;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        /* Scrolling Link Section */
+        .credits-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            animation: scrollUp 15s linear infinite;
+        }
+
+        .arcade-link {
+            color: #00ff00;
+            text-decoration: none;
+            font-size: 0.6rem;
+            margin: 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px #000;
+        }
+
+        .arcade-link:hover {
+            color: #fff;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        @keyframes scrollUp {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(-120%); }
+        }
+
+        /* CRT Flicker Effect */
+        @keyframes flicker {
+            0% { opacity: 0.98; }
+            10% { opacity: 1; }
+            20% { opacity: 0.99; }
+            100% { opacity: 1; }
+        }
+        .screen { animation: flicker 0.15s infinite; }
+    </style>
+</head>
+<body>
+
+<div class="arcade-container">
+    <img src="arcade.PNG" class="cabinet-shell">
+
+    <div class="screen">
+        <div class="scanlines"></div>
+        <div class="credits-container">
+            <a href="#" class="arcade-link">1P: Main Portfolio</a>
+            <a href="#" class="arcade-link">2P: Social Media</a>
+            <a href="#" class="arcade-link">High Score: GitHub</a>
+            <a href="#" class="arcade-link">Insert Coin: Blog</a>
+            <a href="#" class="arcade-link">Game Over: Contact</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
