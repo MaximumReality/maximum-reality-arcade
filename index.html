@@ -6,37 +6,17 @@
     <title>MAXIMUM REALITY</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        body { 
-            background-color: #000; 
-            margin: 0; 
-            padding: 0;
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            font-family: 'Press Start 2P', cursive; 
-            overflow: hidden; 
-        }
+        body { background-color: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Press Start 2P', cursive; overflow: hidden; }
         
-        .arcade-container { 
-            position: relative; 
-            width: 95vw; 
-            max-width: 800px; 
-        }
+        .arcade-container { position: relative; width: 95vw; max-width: 800px; }
         
-        .cabinet-shell { 
-            width: 100%; 
-            display: block; 
-            position: relative; 
-            z-index: 50; 
-            pointer-events: none; 
-        }
+        .cabinet-shell { width: 100%; display: block; position: relative; z-index: 50; pointer-events: none; }
 
-        /* FIXED SCREEN COORDINATES */
+        /* SCREEN COORDINATES - Using your 11% fix */
         .screen {
             position: absolute;
             top: 36.2%; 
-            left: 11%;    /* Centered in the cabinet hole */
+            left: 11%;    
             width: 71%; 
             height: 32.8%;
             background: #000; 
@@ -48,77 +28,47 @@
             animation: pulseGreen 4s ease-in-out infinite alternate, pulseMagenta 4s ease-in-out infinite alternate 2s;
         }
 
-        .intro-video { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            opacity: 0.8; 
-            z-index: 101; 
+        .intro-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.9; z-index: 101; filter: contrast(1.2) brightness(1.1); }
+
+        /* NEW: THE SCANLINE LAYER */
+        .scanlines {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 3px 100%;
+            z-index: 105;
+            pointer-events: none;
+            animation: crtFlicker 0.15s infinite;
         }
 
-        /* THE BUTTON BAR */
+        @keyframes crtFlicker {
+            0% { opacity: 0.97; }
+            50% { opacity: 1; }
+            100% { opacity: 0.98; }
+        }
+
+        /* BUTTONS */
         .button-container {
             position: absolute;
-            bottom: 11%; 
-            left: 0;   
-            width: 100%;  
-            height: 80px;
+            bottom: 11%; left: 0; width: 100%; height: 80px;
             z-index: 200;
             pointer-events: none; 
         }
 
         .hotspot {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            /* Changed to transparent so they are invisible but functional */
+            position: absolute; width: 80px; height: 80px;
             background: transparent; 
             border-radius: 50%;
-            pointer-events: auto; 
-            cursor: pointer;
-            /* Prevents the gray flash on iPhone when tapping */
+            pointer-events: auto; cursor: pointer;
             -webkit-tap-highlight-color: transparent; 
         }
 
-        /* LEFT BUTTON (UNMUTE) */
-        #unmute-btn { 
-            left: 24%;    
-        }
+        #unmute-btn { left: 24%; }
+        #mute-btn { right: 18%; }
 
-        /* RIGHT BUTTON (MUTE) */
-        #mute-btn { 
-            right: 18%;   
-        }
-
-        .credits-container { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            z-index: 110; 
-            animation: scrollUp 15s linear infinite; 
-        }
-        
-        .arcade-link { 
-            color: #ffffff; 
-            text-decoration: none; 
-            font-size: 0.5rem; 
-            margin: 12px auto; 
-            padding: 8px 12px; 
-            text-align: center; 
-            display: block; 
-            width: fit-content; 
-            background: linear-gradient(135deg, #8b5cf6, #a855f7); 
-            border-radius: 999px; 
-            box-shadow: 0 0 10px rgba(168, 85, 247, 0.6); 
-        }
+        .credits-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; z-index: 110; animation: scrollUp 15s linear infinite; }
+        .arcade-link { color: #ffffff; text-decoration: none; font-size: 0.5rem; margin: 12px auto; padding: 8px 12px; text-align: center; display: block; width: fit-content; background: linear-gradient(135deg, #8b5cf6, #a855f7); border-radius: 999px; box-shadow: 0 0 10px rgba(168, 85, 247, 0.6); }
 
         @keyframes pulseGreen { 0% { border-color:#39ff14; } 100% { border-color:#7fff3f; } }
         @keyframes pulseMagenta { 0% { box-shadow:0 0 15px #ff00ff inset; } 100% { box-shadow:0 0 30px #ff00ff inset; } }
@@ -139,6 +89,9 @@
         <video id="arcadeVideo" class="intro-video" autoplay muted loop playsinline>
             <source src="maximum_intro.mp4" type="video/mp4">
         </video>
+        
+        <div class="scanlines"></div>
+
         <div class="credits-container">
             <a href="#" class="arcade-link">1P: MAIN HUB</a>
             <a href="#" class="arcade-link">2P: PROJECT VAULT</a>
@@ -152,7 +105,6 @@
     function toggleAudio(isMute) {
         const video = document.getElementById('arcadeVideo');
         video.muted = isMute;
-        // Ensures the video keeps playing after interaction
         video.play();
     }
 </script>
