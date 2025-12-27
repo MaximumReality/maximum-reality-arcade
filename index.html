@@ -7,14 +7,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         body { background-color: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Press Start 2P', cursive; overflow: hidden; }
+        
         .arcade-container { position: relative; width: 95vw; max-width: 800px; }
         
         .cabinet-shell { width: 100%; display: block; position: relative; z-index: 50; pointer-events: none; }
 
-        /* YOUR PERFECTED SCREEN COORDINATES */
+        /* SCREEN COORDINATES */
         .screen {
             position: absolute;
-            top: 36.2%; left: 15%; width: 66%; height: 32.8%;
+            top: 36.2%; left: 22%; width: 71%; height: 32.8%;
             background: #000; overflow: hidden; border-radius: 4px; z-index: 100;
             border: 2px solid #39ff14;
             box-shadow: 0 0 15px #ff00ff inset;
@@ -23,38 +24,30 @@
 
         .intro-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.8; z-index: 101; }
 
-        /* THE CABINET BUTTON HOTSPOTS */
-        <style>
-    /* This bar stays locked to the cabinet joysticks */
-    .button-container {
-        position: absolute;
-        bottom: 11%; /* The height of your physical buttons */
-        left: 10%;   /* Starts near the left edge */
-        width: 80%;  /* Stretches across the cabinet */
-        height: 70px;
-        display: flex;
-        justify-content: space-between; /* Pushes one to the far left, one to the far right */
-        z-index: 200;
-        pointer-events: none; /* Let clicks pass through the container itself */
-    }
+        /* THE BUTTON BAR */
+        .button-container {
+            position: absolute;
+            bottom: 11%; 
+            left: 15%;   
+            width: 70%;  
+            height: 70px;
+            display: flex;
+            justify-content: space-between; 
+            z-index: 200;
+            pointer-events: none; 
+        }
 
-    .hotspot {
-        width: 70px;
-        height: 70px;
-        background: rgba(0, 255, 0, 0.3); /* Visible for testing - change to transparent later */
-        border-radius: 50%;
-        pointer-events: auto; /* Makes only the circles clickable */
-        cursor: pointer;
-    }
-</style>
-
-<div class="button-container">
-    <div id="unmute-btn" class="hotspot" onclick="toggleAudio(false)"></div>
-    
-    <div id="mute-btn" class="hotspot" onclick="toggleAudio(true)"></div>
-</div>
+        .hotspot {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 255, 0, 0.4); /* GREEN FOR TESTING - CHANGE TO TRANSPARENT LATER */
+            border-radius: 50%;
+            pointer-events: auto; 
+            cursor: pointer;
+        }
 
         .credits-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; z-index: 110; animation: scrollUp 15s linear infinite; }
+        
         .arcade-link { color: #ffffff; text-decoration: none; font-size: 0.5rem; margin: 12px auto; padding: 8px 12px; text-align: center; display: block; width: fit-content; background: linear-gradient(135deg, #8b5cf6, #a855f7); border-radius: 999px; box-shadow: 0 0 10px rgba(168, 85, 247, 0.6); }
 
         @keyframes pulseGreen { 0% { border-color:#39ff14; } 100% { border-color:#7fff3f; } }
@@ -67,8 +60,10 @@
 <div class="arcade-container">
     <img src="arcade.PNG" class="cabinet-shell">
     
-    <div id="unmute-btn" class="mute-toggle" onclick="toggleAudio(false)"></div>
-    <div id="mute-btn" class="mute-toggle" onclick="toggleAudio(true)"></div>
+    <div class="button-container">
+        <div id="unmute-btn" class="hotspot" onclick="toggleAudio(false)"></div>
+        <div id="mute-btn" class="hotspot" onclick="toggleAudio(true)"></div>
+    </div>
 
     <div class="screen">
         <video id="arcadeVideo" class="intro-video" autoplay muted loop playsinline>
@@ -76,9 +71,9 @@
         </video>
         <div class="credits-container">
             <a href="#" class="arcade-link">1P: MAIN HUB</a>
-            <a href="#" class="arcade-link">2P: PROJECTS</a>
+            <a href="#" class="arcade-link">2P: PROJECT VAULT</a>
             <a href="#" class="arcade-link">HIGH SCORE</a>
-            <a href="#" class="arcade-link">CONTACT</a>
+            <a href="#" class="arcade-link">EXIT: CONTACT</a>
         </div>
     </div>
 </div>
@@ -87,7 +82,6 @@
     function toggleAudio(isMute) {
         const video = document.getElementById('arcadeVideo');
         video.muted = isMute;
-        // Re-trigger play in case it paused during the toggle
         video.play();
     }
 </script>
