@@ -6,69 +6,119 @@
     <title>MAXIMUM REALITY</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Press Start 2P', cursive; overflow: hidden; }
+        body { 
+            background-color: #000; 
+            margin: 0; 
+            padding: 0;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            font-family: 'Press Start 2P', cursive; 
+            overflow: hidden; 
+        }
         
-        .arcade-container { position: relative; width: 95vw; max-width: 800px; }
+        .arcade-container { 
+            position: relative; 
+            width: 95vw; 
+            max-width: 800px; 
+        }
         
-        .cabinet-shell { width: 100%; display: block; position: relative; z-index: 50; pointer-events: none; }
+        .cabinet-shell { 
+            width: 100%; 
+            display: block; 
+            position: relative; 
+            z-index: 50; 
+            pointer-events: none; 
+        }
 
-        /* SCREEN COORDINATES */
+        /* FIXED SCREEN COORDINATES */
         .screen {
             position: absolute;
-            top: 36.2%; left: 27%; width: 71%; height: 32.8%;
-            background: #000; overflow: hidden; border-radius: 4px; z-index: 100;
+            top: 36.2%; 
+            left: 14.5%;    /* Centered in the cabinet hole */
+            width: 71%; 
+            height: 32.8%;
+            background: #000; 
+            overflow: hidden; 
+            border-radius: 4px; 
+            z-index: 100;
             border: 2px solid #39ff14;
             box-shadow: 0 0 15px #ff00ff inset;
             animation: pulseGreen 4s ease-in-out infinite alternate, pulseMagenta 4s ease-in-out infinite alternate 2s;
         }
 
-        .intro-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.8; z-index: 101; }
+        .intro-video { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            opacity: 0.8; 
+            z-index: 101; 
+        }
 
         /* THE BUTTON BAR */
-.button-container {
-    position: absolute;
-    bottom: 11%; 
-    left: 0;   
-    width: 100%;  
-    height: 70px;
-    z-index: 200;
-    pointer-events: none; 
-}
-
-.hotspot {
-    position: absolute; /* This allows us to move them independently */
-    width: 70px;
-    height: 70px;
-    background: rgba(0, 255, 0, 0.4); 
-    border-radius: 50%;
-    pointer-events: auto; 
-    cursor: pointer;
-}
-
-/* LEFT BUTTON: Adjust 'left' to nudge it */
-#unmute-btn { 
-    left: 32%;    /* INCREASE this number (e.g., 22%, 25%) to move it RIGHT toward center */
-}
-
-/* RIGHT BUTTON: Leave this exactly where it is */
-#mute-btn { 
-    right: 18%;   /* This is your 'perfect' position */
-}
-
-
+        .button-container {
+            position: absolute;
+            bottom: 11%; 
+            left: 0;   
+            width: 100%;  
+            height: 80px;
+            z-index: 200;
+            pointer-events: none; 
+        }
 
         .hotspot {
-            width: 70px;
-            height: 70px;
-            background: rgba(0, 255, 0, 0.0); /* GREEN FOR TESTING - CHANGE TO TRANSPARENT LATER */
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            /* Changed to transparent so they are invisible but functional */
+            background: transparent; 
             border-radius: 50%;
             pointer-events: auto; 
             cursor: pointer;
+            /* Prevents the gray flash on iPhone when tapping */
+            -webkit-tap-highlight-color: transparent; 
         }
 
-        .credits-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; z-index: 110; animation: scrollUp 15s linear infinite; }
+        /* LEFT BUTTON (UNMUTE) */
+        #unmute-btn { 
+            left: 24%;    
+        }
+
+        /* RIGHT BUTTON (MUTE) */
+        #mute-btn { 
+            right: 18%;   
+        }
+
+        .credits-container { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            z-index: 110; 
+            animation: scrollUp 15s linear infinite; 
+        }
         
-        .arcade-link { color: #ffffff; text-decoration: none; font-size: 0.5rem; margin: 12px auto; padding: 8px 12px; text-align: center; display: block; width: fit-content; background: linear-gradient(135deg, #8b5cf6, #a855f7); border-radius: 999px; box-shadow: 0 0 10px rgba(168, 85, 247, 0.6); }
+        .arcade-link { 
+            color: #ffffff; 
+            text-decoration: none; 
+            font-size: 0.5rem; 
+            margin: 12px auto; 
+            padding: 8px 12px; 
+            text-align: center; 
+            display: block; 
+            width: fit-content; 
+            background: linear-gradient(135deg, #8b5cf6, #a855f7); 
+            border-radius: 999px; 
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.6); 
+        }
 
         @keyframes pulseGreen { 0% { border-color:#39ff14; } 100% { border-color:#7fff3f; } }
         @keyframes pulseMagenta { 0% { box-shadow:0 0 15px #ff00ff inset; } 100% { box-shadow:0 0 30px #ff00ff inset; } }
@@ -102,6 +152,7 @@
     function toggleAudio(isMute) {
         const video = document.getElementById('arcadeVideo');
         video.muted = isMute;
+        // Ensures the video keeps playing after interaction
         video.play();
     }
 </script>
