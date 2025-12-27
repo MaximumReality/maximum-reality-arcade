@@ -24,19 +24,37 @@
 
         .intro-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.8; z-index: 101; }
 
-        /* THE BUTTON BAR - FIXED CENTER LOGIC */
+        /* THE BUTTON BAR */
 .button-container {
     position: absolute;
     bottom: 11%; 
     left: 0;   
-    width: 100%;  /* Now spans the whole width so we can center things */
+    width: 100%;  
     height: 70px;
-    display: flex;
-    justify-content: center; /* Centers both buttons */
-    gap: 140px;              /* ADJUST THIS: Lower = Closer Together, Higher = Further Apart */
     z-index: 200;
     pointer-events: none; 
 }
+
+.hotspot {
+    position: absolute; /* This allows us to move them independently */
+    width: 70px;
+    height: 70px;
+    background: rgba(0, 255, 0, 0.4); 
+    border-radius: 50%;
+    pointer-events: auto; 
+    cursor: pointer;
+}
+
+/* LEFT BUTTON: Adjust 'left' to nudge it */
+#unmute-btn { 
+    left: 20%;    /* INCREASE this number (e.g., 22%, 25%) to move it RIGHT toward center */
+}
+
+/* RIGHT BUTTON: Leave this exactly where it is */
+#mute-btn { 
+    right: 18%;   /* This is your 'perfect' position */
+}
+
 
 
         .hotspot {
