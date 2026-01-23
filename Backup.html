@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAXIMUM REALITY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Press Start 2P', cursive; overflow: hidden; flex-direction: column; }
+        
+        .arcade-container { position: relative; width: 95vw; max-width: 800px; }
+        
+        .cabinet-shell { width: 100%; display: block; position: relative; z-index: 50; pointer-events: none; }
+
+        .arcade-header {
+            position: absolute;
+            top: -100px; /* Adjusted so it doesn't fly off screen */
+            width: 100%;
+            text-align: center;
+            color: #fff;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+            letter-spacing: 4px;
+            z-index: 30;
+        }
+
+        .azul-character {
+            position: absolute;
+            top: -80px; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px; 
+            z-index: 40; 
+            pointer-events: none;
+            filter: drop-shadow(0 0 10px rgba(57, 255, 20, 0.5));
+            animation: azulFloat 3s ease-in-out infinite;
+        }
+
+        /* SCREEN: Fixed at 14.5% */
+        .screen {
+            position: absolute;
+            top: 36.2%; left: 14.5%; width: 71%; height: 32.8%;
+            background: #000; overflow: hidden; border-radius: 4px; z-index: 100;
+            border: 2px solid #39ff14;
+            box-shadow: 0 0 15px #ff00ff inset, 0 0 50px rgba(0,0,0,1) inset;
+            animation: pulseGreen 4s ease-in-out infinite alternate, pulseMagenta 4s ease-in-out infinite alternate 2s;
+        }
+
+        .intro-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.9; z-index: 101; filter: contrast(1.2) brightness(1.1); }
+
+        .scanlines {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 3px 100%;
+            z-index: 105; pointer-events: none; animation: crtFlicker 0.15s infinite;
+        }
+
+        @keyframes crtFlicker { 0% { opacity: 0.97; } 50% { opacity: 1; } 100% { opacity: 0.98; } }
+
+        /* BUTTONS */
+        .button-container { position: absolute; bottom: 11%; left: 0; width: 100%; height: 80px; z-index: 200; pointer-events: none; }
+        .hotspot { position: absolute; width: 80px; height: 80px; background: transparent; border-radius: 50%; pointer-events: auto; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+        #unmute-btn { left: 24%; }
+        #mute-btn { right: 18%; }
+
+        /* FOOTER */
+        .arcade-footer {
+            position: absolute;
+            bottom: -60px; /* Positions it below the cabinet */
+            width: 100%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.4rem;
+            letter-spacing: 1px;
+            line-height: 1.5;
+            z-index: 300;
+        }
+
+        .coffee-link { background: linear-gradient(135deg, #00f2fe, #4facfe) !important; color: #000 !important; font-weight: bold; box-shadow: 0 0 15px #00f2fe !important; }
+
+        /* LINKS */
+        .credits-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; z-index: 110; animation: scrollUp 40s linear infinite; }
+        .arcade-link { color: #ffffff; text-decoration: none; font-size: 0.45rem; margin: 6px auto; padding: 8px 10px; text-align: center; display: block; width: 175px; background: linear-gradient(135deg, #8b5cf6, #a855f7); border-radius: 4px; box-shadow: 0 0 10px rgba(168, 85, 247, 0.6); transition: all 0.2s ease; text-transform: uppercase; letter-spacing: 1px; }
+        .arcade-link:hover { background: #39ff14; color: #000; box-shadow: 0 0 20px #39ff14; transform: scale(1.1); }
+
+        @keyframes azulFloat { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-10px); } }
+        @keyframes pulseGreen { 0% { border-color:#39ff14; } 100% { border-color:#7fff3f; } }
+        @keyframes pulseMagenta { 0% { box-shadow:0 0 15px #ff00ff inset; } 100% { box-shadow:0 0 30px #ff00ff inset; } }
+        @keyframes scrollUp { 0% { transform: translateY(110%); } 100% { transform: translateY(-160%); } }
+    </style>
+</head>
+<body>
+<!-- Home Button -->
+<a href="https://maximumreality.xyz/" class="home-btn" title="Go to Maximum Reality Home">🏠 Home</a>
+
+<style>
+.home-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 2000;
+  background: rgba(255, 0, 255, 0.8);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.home-btn:hover {
+  transform: scale(1.05);
+  background: rgba(255, 0, 255, 1);
+}
+</style>
+<div class="arcade-container">
+    <h1 class="arcade-header">MAXIMUM REALITY</h1>
+    <img src="azul_sitting.png" class="azul-character">
+    <img src="arcade.PNG" class="cabinet-shell">
+    
+    <div class="button-container">
+        <div id="unmute-btn" class="hotspot" onclick="toggleAudio(false)"></div>
+        <div id="mute-btn" class="hotspot" onclick="toggleAudio(true)"></div>
+    </div>
+
+        <div class="screen">
+        <video id="arcadeVideo" class="intro-video" autoplay muted playsinline>
+            <source src="maximum_intro.mp4" type="video/mp4">
+        </video>
+        <div class="scanlines"></div>
+
+        <div class="credits-container">
+    <a href="https://youtube.com/@maximumrealitylori" target="_blank" class="arcade-link">1P: MAX REALITY TV</a>
+    
+    <div style="text-align: center; color: #39ff14; font-size: 0.35rem; margin: 12px 0; border-top: 1px solid #39ff14; padding-top: 8px;">-- ENCRYPTED LORE --</div>
+    
+    <a href="https://maximumreality.github.io/stories/azul_watches_the_world.html" target="_blank" class="arcade-link" style="background: linear-gradient(135deg, #00d2ff, #3a7bd5); border: 1px solid #fff;">DATA: AZUL_WATCHES</a>
+    
+    <a href="https://maximumreality.github.io/stories/01_mochkil_builds_something.html" target="_blank" class="arcade-link" style="background: linear-gradient(135deg, #000000, #434343); color: #fff; border: 1px solid #fff;">DATA: MOCHKIL_BUILDS</a>
+    
+    <a href="https://maximumreality.github.io/stories/mishmish_bziz_date_cookies.html" target="_blank" class="arcade-link" style="background: linear-gradient(135deg, #fceabb, #f8b500); color: #000;">DATA: COOKIE_RITUAL</a>
+
+    <a href="https://maximumreality.github.io/stories/elvie_tree_top_adventures.html" target="_blank" class="arcade-link" style="background: linear-gradient(135deg, #3d5afe, #2e7d32); color: #fff; border: 1px solid #7fff3f;">LOG: ELVIE_TREE_TOP</a>
+
+    <a href="https://maximumreality.github.io/stories/" target="_blank" class="arcade-link" style="background: transparent; border: 1px solid #ff00ff; color: #ff00ff; font-size: 0.35rem;">VIEW_ALL_REALITIES.SYS</a>
+
+    <div style="text-align: center; color: #ff00ff; font-size: 0.35rem; margin: 12px 0; border-top: 1px solid #ff00ff; padding-top: 8px;">-- ACTIVE MISSIONS --</div>
+
+    <a href="https://maximumreality.github.io/WhiskerBytesCatCafe/" target="_blank" class="arcade-link" style="background: linear-gradient(135deg, #ff66cc, #ff3399);">GAME: WHISKER BYTES</a>
+    <a href="https://maximumreality.github.io/snack_attack/" target="_blank" class="arcade-link" style="background: linear-gradient(135deg, #39ff14, #2ebf11); color: #000;">GAME: SNACK ATTACK</a>
+    <a href="https://maximumreality.github.io/Abduction/" target="_blank" class="arcade-link">START: ABDUCTION</a>
+    <a href="https://maximum-reality-shop.fourthwall.com/" target="_blank" class="arcade-link" style="background: linear-gradient(135deg, #ffcc00, #ff9900); color: #000;">SHOP: MERCH DROP</a>
+    
+    <div style="text-align: center; color: #00f2fe; font-size: 0.35rem; margin: 12px 0; border-top: 1px solid #00f2fe; padding-top: 8px;">-- SYSTEM LINKS --</div>
+    <a href="https://buymeacoffee.com/MaximumReality" target="_blank" class="arcade-link coffee-link">SUPPORT: BUY A COFFEE</a>
+    <a href="https://www.tiktok.com/@zer0chick" target="_blank" class="arcade-link">TIKTOK</a>
+    <a href="https://www.instagram.com/maximumrealitylori" target="_blank" class="arcade-link">INSTAGRAM</a>
+</div>
+
+    </div> <div class="arcade-footer">
+        © 2025-2026 LORI SIFUENTES | PART OF THE MAXIMUM REALITY UNIVERSE<br>
+        STAY GLITCHY. NO NICHE, JUST VIBES.
+    </div>
+
+</div> 
+
+
+   </div>
+
+<script>
+    const videoPlaylist = ["maximum_intro.mp4", "abducted.mp4"];
+    let currentIdx = 0;
+    const player = document.getElementById('arcadeVideo');
+
+    player.onended = function() {
+        currentIdx = (currentIdx + 1) % videoPlaylist.length;
+        player.src = videoPlaylist[currentIdx];
+        player.play();
+    };
+
+    function toggleAudio(isMute) {
+        player.muted = isMute;
+        player.play();
+    }
+</script>
+
+</body>
+</html>
