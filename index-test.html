@@ -6,27 +6,11 @@
 <title>MAXIMUM REALITY</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
-body {
-    background-color: #000;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: 'Press Start 2P', cursive;
-    overflow: hidden;
-    flex-direction: column;
-}
+body { background-color: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Press Start 2P', cursive; overflow: hidden; flex-direction: column; }
 
 .arcade-container { position: relative; width: 95vw; max-width: 800px; }
 
-.cabinet-shell {
-    width: 100%;
-    display: block;
-    position: relative;
-    z-index: 60; /* cabinet in front of Azul */
-    pointer-events: none;
-}
+.cabinet-shell { width: 100%; display: block; position: relative; z-index: 50; pointer-events: none; }
 
 .arcade-header {
     position: absolute;
@@ -42,11 +26,11 @@ body {
 
 .azul-character {
     position: absolute;
-    top: -10px; /* peeking over top of cabinet */
+    top: -20px;
     left: 50%;
     transform: translateX(-50%);
     width: 120px;
-    z-index: 50;
+    z-index: 40;
     pointer-events: none;
     filter: drop-shadow(0 0 10px rgba(57, 255, 20, 0.5));
     animation: azulFloat 3s ease-in-out infinite;
@@ -69,7 +53,8 @@ body {
 
 .intro-video {
     position: absolute;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -79,38 +64,21 @@ body {
 }
 
 .scanlines {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.25) 50%), 
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
                 linear-gradient(90deg, rgba(255,0,0,0.06), rgba(0,255,0,0.02), rgba(0,0,255,0.06));
     background-size: 100% 4px, 3px 100%;
     z-index: 105; pointer-events: none; animation: crtFlicker 0.15s infinite;
 }
 
-@keyframes crtFlicker { 0% {opacity:0.97;} 50% {opacity:1;} 100% {opacity:0.98;} }
-
-.button-container {
-    position: absolute;
-    bottom: 11%;
-    left: 0;
-    width: 100%;
-    height: 80px;
-    z-index: 200;
-    pointer-events: none;
-}
-
-.hotspot {
-    position: absolute;
-    width: 80px; height: 80px;
-    background: transparent;
-    border-radius: 50%;
-    pointer-events: auto;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-}
-
+/* Buttons */
+.button-container { position: absolute; bottom: 11%; left: 0; width: 100%; height: 80px; z-index: 200; pointer-events: none; }
+.hotspot { position: absolute; width: 80px; height: 80px; background: transparent; border-radius: 50%; pointer-events: auto; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 #unmute-btn { left: 24%; }
 #mute-btn { right: 18%; }
 
+/* Footer */
 .arcade-footer {
     position: absolute;
     bottom: -60px;
@@ -123,10 +91,13 @@ body {
     z-index: 300;
 }
 
+/* Links */
 .credits-container {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -150,7 +121,6 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
 }
-
 .arcade-link:hover {
     background: #39ff14;
     color: #000;
@@ -158,10 +128,12 @@ body {
     transform: scale(1.1);
 }
 
-@keyframes azulFloat { 0%,100% {transform: translateX(-50%) translateY(0);} 50% {transform: translateX(-50%) translateY(-10px);} }
-@keyframes pulseGreen { 0% {border-color:#39ff14;} 100% {border-color:#7fff3f;} }
-@keyframes pulseMagenta { 0% {box-shadow:0 0 15px #ff00ff inset;} 100% {box-shadow:0 0 30px #ff00ff inset;} }
-@keyframes scrollUp { 0% {transform: translateY(110%);} 100% {transform: translateY(-160%);} }
+/* Animations */
+@keyframes azulFloat { 0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-10px);} }
+@keyframes pulseGreen { 0%{border-color:#39ff14;} 100%{border-color:#7fff3f;} }
+@keyframes pulseMagenta { 0%{box-shadow:0 0 15px #ff00ff inset;} 100%{box-shadow:0 0 30px #ff00ff inset;} }
+@keyframes scrollUp { 0%{transform:translateY(110%);}100%{transform:translateY(-160%);} }
+@keyframes crtFlicker { 0%{opacity:0.97;}50%{opacity:1;}100%{opacity:0.98;} }
 
 /* Home Button */
 .home-btn {
@@ -169,7 +141,7 @@ body {
   top: 16px;
   left: 16px;
   z-index: 2000;
-  background: rgba(255, 0, 255, 0.8);
+  background: rgba(255,0,255,0.8);
   color: #fff;
   padding: 8px 12px;
   border-radius: 12px;
@@ -179,8 +151,7 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.2s ease, background 0.2s ease;
 }
-.home-btn:hover { transform: scale(1.05); background: rgba(255,0,255,1); }
-
+.home-btn:hover { transform: scale(1.05); background: rgba(255,0,255,1);}
 </style>
 </head>
 <body>
@@ -207,7 +178,7 @@ body {
             <a href="https://maximumreality.github.io/Abduction/" target="_blank" class="arcade-link">START: ABDUCTION</a>
             <a href="https://maximumreality.github.io/WhiskerBytesCatCafe/" target="_blank" class="arcade-link">GAME: WHISKER BYTES</a>
             <a href="https://maximumreality.github.io/bessara_blast/" target="_blank" class="arcade-link">GAME: BESSARA BLAST</a>
-            <a href="https://maximumreality.github.io/the_cereal_wars/index.html" target="_blank" class="arcade-link">GAME: CEREAL WARS</a>
+            <a href="https://maximumreality.github.io/the_cereal_wars/index.html" target="_blank" class="arcade-link">GAME: THE CEREAL WARS</a>
             <a href="https://maximumreality.github.io/snack_attack/" target="_blank" class="arcade-link">GAME: SNACK ATTACK</a>
             <a href="https://maximumreality.github.io/sphynx-overdrive/" target="_blank" class="arcade-link">GAME: SPHYNX OVERDRIVE</a>
         </div>
@@ -217,7 +188,6 @@ body {
         © 2025-2026 LORI SIFUENTES | PART OF THE MAXIMUM REALITY UNIVERSE<br>
         STAY GLITCHY. NO NICHE, JUST VIBES.
     </div>
-
 </div>
 
 <script>
