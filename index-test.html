@@ -31,7 +31,7 @@ body {
     z-index: 50;
 }
 
-/* Header */
+/* Header (optional, can remove if unwanted) */
 .arcade-header {
     position: absolute;
     top: -100px;
@@ -44,7 +44,7 @@ body {
     z-index: 30;
 }
 
-/* Character overlay */
+/* Azul character peek */
 .azul-character {
     position: absolute;
     top: -80px;
@@ -73,7 +73,7 @@ body {
     animation: pulseGreen 4s ease-in-out infinite alternate, pulseMagenta 4s ease-in-out infinite alternate 2s;
 }
 
-/* Video */
+/* Video background */
 .intro-video {
     width: 100%;
     height: 100%;
@@ -93,7 +93,7 @@ body {
     animation: crtFlicker 0.15s infinite;
 }
 
-/* Button container */
+/* Buttons */
 .button-container {
     position: absolute;
     bottom: 11%;
@@ -112,31 +112,35 @@ body {
     cursor: pointer;
 }
 
-/* Game links */
-.games-container {
+/* Scrolling game links inside screen */
+.credits-container {
     position: absolute;
-    top: 38%;
+    top: 0;
     left: 0;
     width: 100%;
-    height: 50%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     z-index: 110;
+    animation: scrollUp 30s linear infinite;
 }
 .game-link {
     text-decoration: none;
     color: #fff;
-    background: linear-gradient(135deg, #ff33cc, #ff6600);
-    padding: 10px 14px;
+    font-size: 0.45rem;
     margin: 6px 0;
-    border-radius: 6px;
-    font-size: 0.55rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    padding: 8px 10px;
+    text-align: center;
+    display: block;
+    width: 160px;
+    background: linear-gradient(135deg, #ff33cc, #ff6600);
+    border-radius: 4px;
     box-shadow: 0 0 10px rgba(255,102,0,0.5);
     transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 .game-link:hover {
     transform: scale(1.05);
@@ -150,6 +154,7 @@ body {
 @keyframes pulseGreen { 0% { border-color:#39ff14; } 100% { border-color:#7fff3f; } }
 @keyframes pulseMagenta { 0% { box-shadow:0 0 15px #ff00ff inset; } 100% { box-shadow:0 0 30px #ff00ff inset; } }
 @keyframes crtFlicker { 0% { opacity:0.97; } 50%{ opacity:1; } 100%{ opacity:0.98; } }
+@keyframes scrollUp { 0% { transform: translateY(110%); } 100% { transform: translateY(-160%); } }
 
 /* Home button */
 .home-btn {
@@ -192,15 +197,15 @@ body {
             <source src="maximum_intro.mp4" type="video/mp4">
         </video>
         <div class="scanlines"></div>
-    </div>
 
-    <div class="games-container">
-        <a href="https://maximumreality.github.io/Abduction/" target="_blank" class="game-link">Abduction</a>
-        <a href="https://maximumreality.github.io/WhiskerBytesCatCafe/" target="_blank" class="game-link">Whisker Bytes</a>
-        <a href="https://maximumreality.github.io/bessara_blast/" target="_blank" class="game-link">Bessara Blast</a>
-        <a href="https://maximumreality.github.io/the_cereal_wars/index.html" target="_blank" class="game-link">The Cereal Wars</a>
-        <a href="https://maximumreality.github.io/snack_attack/" target="_blank" class="game-link">Snack Attack</a>
-        <a href="https://maximumreality.github.io/sphynx-overdrive/" target="_blank" class="game-link">Sphynx Overdrive</a>
+        <div class="credits-container">
+            <a href="https://maximumreality.github.io/Abduction/" target="_blank" class="game-link">Abduction</a>
+            <a href="https://maximumreality.github.io/WhiskerBytesCatCafe/" target="_blank" class="game-link">Whisker Bytes</a>
+            <a href="https://maximumreality.github.io/bessara_blast/" target="_blank" class="game-link">Bessara Blast</a>
+            <a href="https://maximumreality.github.io/the_cereal_wars/index.html" target="_blank" class="game-link">The Cereal Wars</a>
+            <a href="https://maximumreality.github.io/snack_attack/" target="_blank" class="game-link">Snack Attack</a>
+            <a href="https://maximumreality.github.io/sphynx-overdrive/" target="_blank" class="game-link">Sphynx Overdrive</a>
+        </div>
     </div>
 </div>
 
