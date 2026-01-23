@@ -47,20 +47,23 @@
 
     .error-message { 
         position: absolute; 
-        top: 36%; /* moved down ~1/2 inch */ 
+        top: 36%; 
         width: 50%;  
         left: 50%; 
         transform: translateX(-50%); 
         font-size: 0.5rem; 
-        text-shadow: none; /* removed glow */ 
+        text-shadow: none; 
         z-index: 100; 
         line-height: 1.4; 
+    }
+
+    .error-message h1, .error-message p { 
+        text-shadow: none; /* no glow on top text */ 
     }
 
     .error-message h1 { 
         font-size: 1.2rem; 
         margin-bottom: 10px; 
-        text-shadow: none; 
     }
 
     .error-message a { 
@@ -68,7 +71,7 @@
         text-decoration: none; 
         font-size: 0.8rem; 
         display: inline-block; 
-        margin-top: 135px; /* slightly lower */ 
+        margin-top: 135px; 
         padding: 6px 10px; 
         background: #000; 
         border: 2px solid #39ff14; 
