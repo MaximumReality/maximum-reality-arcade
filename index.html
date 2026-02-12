@@ -135,28 +135,33 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
 @keyframes scrollUp { 0%{transform:translateY(110%);}100%{transform:translateY(-160%);} }
 @keyframes crtFlicker { 0%{opacity:0.97;}50%{opacity:1;}100%{opacity:0.98;} }
 
-/* Home Button */
+/* Home Button - Clean Version */
 .home-btn {
   position: fixed;
   top: 16px;
   left: 16px;
   z-index: 2000;
-  background: rgba(255,0,255,0.8);
+  background: none;        /* REMOVED: Pink background */
   color: #fff;
-  padding: 8px 12px;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 0.85rem;
+  padding: 0;             /* REMOVED: Padding */
+  font-size: 1.8rem;      /* Increased size since the capsule is gone */
   text-decoration: none;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  transition: transform 0.2s ease, background 0.2s ease;
+  filter: drop-shadow(0 0 8px rgba(255, 0, 255, 0.8)); /* Neon glow instead of a box */
+  transition: transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
-.home-btn:hover { transform: scale(1.05); background: rgba(255,0,255,1);}
+
+.home-btn:hover { 
+  transform: scale(1.2) rotate(-5deg); 
+  filter: drop-shadow(0 0 15px rgba(57, 255, 20, 1)); /* Turns Green on hover */
+}
+
 </style>
 </head>
 <body>
 
-<a href="https://maximumreality.xyz/" class="home-btn" title="Go to Maximum Reality Home">🏠 Home</a>
+<a href="https://maximumreality.xyz/" class="home-btn" title="Go to Maximum Reality Home">🏡</a>
+
 
 <div class="arcade-container">
     <h1 class="arcade-header">MAXIMUM REALITY</h1>
