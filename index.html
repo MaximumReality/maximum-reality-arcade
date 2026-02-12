@@ -12,22 +12,44 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
 
 .arcade-container { position: relative; width: 95vw; max-width: 800px; }
 
-/* THE CABINET - Z-INDEX 50 */
+/* HOME BUTTON - 🏡 */
+.home-btn {
+  position: absolute;
+  top: -120px;
+  left: 10px;
+  z-index: 2000;
+  color: #fff;
+  font-size: 1.5rem;
+  text-decoration: none;
+  filter: drop-shadow(0 0 8px var(--neon-pink));
+}
+
+/* THE NEON HEADER */
+.arcade-header {
+    position: absolute;
+    top: -100px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 1.1rem;
+    text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+    letter-spacing: 4px;
+    z-index: 30;
+}
+
 .cabinet-shell { width: 100%; display: block; position: relative; z-index: 50; pointer-events: none; }
 
-/* AZUL - Z-INDEX 40 (PEEKING BEHIND) */
 .azul-character {
     position: absolute;
-    top: -85px; /* High up as requested */
+    top: -85px; 
     left: 50%;
     transform: translateX(-50%);
     width: 120px;
-    z-index: 40; /* Lower than cabinet shell (50) */
+    z-index: 40; /* Behind cabinet */
     pointer-events: none;
     animation: azulFloat 3s ease-in-out infinite;
 }
 
-/* THE SCREEN */
 .screen {
     position: absolute;
     top: 36.2%;
@@ -44,15 +66,15 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     box-shadow: 0 0 15px var(--neon-pink) inset;
 }
 
-/* THE GRID BACKGROUND */
+/* FIXED GRID BACKGROUND */
 .screen::before {
     content: "";
-    position: fixed; /* Keep it still while text scrolls */
+    position: fixed;
     top: 36.2%; left: 14.5%; width: 71%; height: 32.8%;
     background-image: 
-        linear-gradient(rgba(255, 0, 255, 0.3) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 0, 255, 0.3) 1px, transparent 1px);
-    background-size: 30px 30px;
+        linear-gradient(rgba(255, 0, 255, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 0, 255, 0.2) 1px, transparent 1px);
+    background-size: 40px 40px;
     z-index: -1;
 }
 
@@ -60,7 +82,7 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 0 300px 0; /* Extra bottom padding for the waterfall */
+    padding: 20px 0 350px 0; 
 }
 
 .arcade-link {
@@ -85,7 +107,7 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     width: 100%;
     text-align: center;
     color: rgba(255,255,255,0.5);
-    font-size: 0.4rem;
+    font-size: 0.35rem;
 }
 
 @keyframes azulFloat { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(-10px);} }
@@ -94,6 +116,8 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
 <body>
 
 <div class="arcade-container">
+    <a href="https://maximumreality.xyz/" class="home-btn">🏡</a>
+    <h1 class="arcade-header">MAXIMUM REALITY</h1>
     <img src="azul_sitting.png" class="azul-character">
     <img src="arcade.PNG" class="cabinet-shell">
 
@@ -112,7 +136,7 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     </div>
 
     <div class="arcade-footer">
-        © 2025-2026 LORI SIFUENTES | NO NICHE, JUST VIBES. 👾
+        © 2025-2026 LORI SIFUENTES | NO NICHE, JUST VIBES. 🎱
     </div>
 </div>
 
@@ -124,19 +148,17 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     function waterfall() {
         if (!isPaused) {
             screen.scrollTop += 1;
-            // If we hit the end of the list, snap back to top
             if (screen.scrollTop >= (container.scrollHeight - screen.offsetHeight)) {
                 screen.scrollTop = 0;
             }
         }
         requestAnimationFrame(waterfall);
     }
-
     waterfall();
 
     screen.addEventListener('touchstart', () => { isPaused = true; });
     screen.addEventListener('touchend', () => { 
-        setTimeout(() => { isPaused = false; }, 3000); 
+        setTimeout(() => { isPaused = false; }, 4000); 
     });
 </script>
 
