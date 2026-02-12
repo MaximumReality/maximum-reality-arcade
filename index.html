@@ -44,7 +44,7 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     left: 14.5%;
     width: 71%;
     height: 32.8%;
-    background: #000; /* Pure black for better contrast */
+    background: #000;
     overflow-y: auto; 
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -53,14 +53,36 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     border: 2px solid var(--neon-green);
     box-shadow: 0 0 15px var(--neon-pink) inset;
     
-    /* LIGHTER GRID: Using rgba for transparency so it's not too aggressive */
-    background-image: 
-        linear-gradient(rgba(255, 0, 255, 0.2) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 0, 255, 0.2) 1px, transparent 1px);
-    background-size: 30px 30px;
-    background-position: center center;
-    animation: gridScroll 4s linear infinite, crtFlicker 0.1s infinite;
+    /* THE 3D PERSPECTIVE GRID */
+    perspective: 200px; /* Adjust this to change the depth of the tilt */
+    overflow: hidden; /* Keeps the grid inside the monitor boundaries */
 }
+
+/* We create a 'floor' for the grid to live on */
+.screen::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: 
+        linear-gradient(rgba(255, 0, 255, 0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 0, 255, 0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+    /* This creates the Synthwave 'Floor' tilt */
+    transform: rotateX(60deg);
+    transform-origin: center center;
+    animation: gridMove 2s linear infinite;
+    z-index: -1; /* Puts it behind your links */
+}
+
+@keyframes gridMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 40px; }
+}
+
+    
 
 .scanlines {
     position: absolute;
@@ -73,13 +95,6 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     pointer-events: none; 
 }
 
-
-
-/* THE ANIMATION FOR THE GRID */
-@keyframes gridScroll {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 30px; }
-}
 
 
 .credits-container {
