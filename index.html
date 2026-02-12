@@ -224,6 +224,42 @@ function toggleAudio(isMute) {
     player.muted = isMute;
     player.play();
 }
+
+   const screen = document.querySelector('.screen');
+let isUserScrolling = false;
+
+// Slow auto-scroll function
+function autoScroll() {
+    if (!isUserScrolling) {
+        screen.scrollTop += 1;
+        // Reset to top if it reaches the bottom
+        if (screen.scrollTop >= (screen.scrollHeight - screen.offsetHeight)) {
+            screen.scrollTop = 0;
+        }
+    }
+}
+
+// Start auto-scroll interval
+let scrollInterval = setInterval(autoScroll, 50);
+
+// Stop auto-scroll when user touches the screen
+let scrollTimeout;
+
+screen.addEventListener('touchstart', () => {
+    isUserScrolling = true;
+    clearInterval(scrollInterval); // Stop auto-scrolling
+    clearTimeout(scrollTimeout);   // Reset the "resume" timer
+});
+
+screen.addEventListener('touchend', () => {
+    // If no one touches the screen for 5 seconds, restart auto-scroll
+    scrollTimeout = setTimeout(() => {
+        isUserScrolling = false;
+        scrollInterval = setInterval(autoScroll, 50);
+    }, 5000); 
+});
+
+
 </script>
 
 </body>
