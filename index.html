@@ -44,7 +44,7 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     left: 14.5%;
     width: 71%;
     height: 32.8%;
-    background: #0a0a0a; /* Dark base */
+    background: #000; /* Pure black for better contrast */
     overflow-y: auto; 
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -53,26 +53,26 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     border: 2px solid var(--neon-green);
     box-shadow: 0 0 15px var(--neon-pink) inset;
     
-    /* THE NEON GRID BACKGROUND */
+    /* LIGHTER GRID: Using rgba for transparency so it's not too aggressive */
     background-image: 
-        linear-gradient(var(--neon-pink) 1px, transparent 1px),
-        linear-gradient(90deg, var(--neon-pink) 1px, transparent 1px);
+        linear-gradient(rgba(255, 0, 255, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 0, 255, 0.2) 1px, transparent 1px);
     background-size: 30px 30px;
     background-position: center center;
-    /* This creates the perspective "Tilt" effect */
-    perspective: 1000px;
     animation: gridScroll 4s linear infinite, crtFlicker 0.1s infinite;
 }
 
 .scanlines {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    /* We are changing this to be a subtle overlay that doesn't darken the top too much */
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
-    background-size: 100% 4px;
+    /* REMOVED: The heavy top/bottom black gradients */
+    /* UPDATED: Thinner lines (2px) for a sharper look */
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
+    background-size: 100% 2px;
     z-index: 105; 
     pointer-events: none; 
 }
+
 
 
 /* THE ANIMATION FOR THE GRID */
