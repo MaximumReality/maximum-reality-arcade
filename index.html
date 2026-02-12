@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>MAXIMUM REALITY</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
+:root { --neon-pink: #ff00ff; --neon-cyan: #00ffff; --neon-green: #39ff14; }
+
 body { background-color: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Press Start 2P', cursive; overflow: hidden; flex-direction: column; }
 
 .arcade-container { position: relative; width: 95vw; max-width: 800px; }
@@ -19,7 +21,7 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     text-align: center;
     color: #fff;
     font-size: 1.2rem;
-    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+    text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
     letter-spacing: 4px;
     z-index: 30;
 }
@@ -42,35 +44,18 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     left: 14.5%;
     width: 71%;
     height: 32.8%;
-    background: #000;
-    /* CHANGE: Allow scrolling and hide the scrollbar */
+    background: #050505;
     overflow-y: auto; 
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     border-radius: 4px;
     z-index: 100;
-    border: 2px solid #39ff14;
-    box-shadow: 0 0 15px #ff00ff inset, 0 0 50px rgba(0,0,0,1) inset;
-    animation: pulseGreen 4s ease-in-out infinite alternate, pulseMagenta 4s ease-in-out infinite alternate 2s;
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 15px var(--neon-pink) inset;
+    animation: pulseGreen 4s ease-in-out infinite alternate;
 }
 
-/* Hide scrollbar for Chrome/Safari */
-.screen::-webkit-scrollbar {
-    display: none;
-}
-
-
-.intro-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.9;
-    z-index: 101;
-    filter: contrast(1.2) brightness(1.1);
-}
+.screen::-webkit-scrollbar { display: none; }
 
 .scanlines {
     position: absolute;
@@ -81,185 +66,105 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     z-index: 105; pointer-events: none; animation: crtFlicker 0.15s infinite;
 }
 
-/* Buttons */
-.button-container { position: absolute; bottom: 11%; left: 0; width: 100%; height: 80px; z-index: 200; pointer-events: none; }
-.hotspot { position: absolute; width: 80px; height: 80px; background: transparent; border-radius: 50%; pointer-events: auto; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-#unmute-btn { left: 24%; }
-#mute-btn { right: 18%; }
-
-/* Footer */
-.arcade-footer {
-    position: absolute;
-    bottom: -60px;
-    width: 100%;
-    text-align: center;
-    color: rgba(255,255,255,0.5);
-    font-size: 0.4rem;
-    letter-spacing: 1px;
-    line-height: 1.5;
-    z-index: 300;
-}
-
-/* Links */
 .credits-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 0; /* Give some space at top and bottom */
+    padding: 30px 0;
     z-index: 110;
-    /* REMOVED: Automatic scrollUp animation */
 }
 
 .arcade-link {
     color: #ffffff;
     text-decoration: none;
     font-size: 0.45rem;
-    margin: 6px auto;
-    padding: 8px 10px;
+    margin: 8px auto;
+    padding: 10px;
     text-align: center;
     display: block;
-    width: 175px;
+    width: 160px;
     background: linear-gradient(135deg, #8b5cf6, #a855f7);
     border-radius: 4px;
     box-shadow: 0 0 10px rgba(168,85,247,0.6);
     transition: all 0.2s ease;
     text-transform: uppercase;
-    letter-spacing: 1px;
-}
-.arcade-link:hover {
-    background: #39ff14;
-    color: #000;
-    box-shadow: 0 0 20px #39ff14;
-    transform: scale(1.1);
 }
 
-/* Animations */
-@keyframes azulFloat { 0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-10px);} }
-@keyframes pulseGreen { 0%{border-color:#39ff14;} 100%{border-color:#7fff3f;} }
-@keyframes pulseMagenta { 0%{box-shadow:0 0 15px #ff00ff inset;} 100%{box-shadow:0 0 30px #ff00ff inset;} }
-@keyframes scrollUp { 0%{transform:translateY(110%);}100%{transform:translateY(-160%);} }
-@keyframes crtFlicker { 0%{opacity:0.97;}50%{opacity:1;}100%{opacity:0.98;} }
+.arcade-link:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 20px var(--neon-green); transform: scale(1.05); }
 
-/* Home Button - Clean Version */
+/* Home Button - Floating */
 .home-btn {
   position: fixed;
-  top: 16px;
-  left: 16px;
+  top: 20px;
+  left: 20px;
   z-index: 2000;
-  background: none;        /* REMOVED: Pink background */
-  color: #fff;
-  padding: 0;             /* REMOVED: Padding */
-  font-size: 1.8rem;      /* Increased size since the capsule is gone */
+  background: none;
+  font-size: 2rem;
   text-decoration: none;
-  filter: drop-shadow(0 0 8px rgba(255, 0, 255, 0.8)); /* Neon glow instead of a box */
-  transition: transform 0.2s ease;
+  filter: drop-shadow(0 0 10px var(--neon-pink));
+  transition: transform 0.2s;
   -webkit-tap-highlight-color: transparent;
 }
+.home-btn:active { transform: scale(1.2); }
 
-.home-btn:hover { 
-  transform: scale(1.2) rotate(-5deg); 
-  filter: drop-shadow(0 0 15px rgba(57, 255, 20, 1)); /* Turns Green on hover */
-}
-
+@keyframes azulFloat { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(-10px);} }
+@keyframes pulseGreen { 0%{border-color:var(--neon-green);} 100%{border-color:#7fff3f;} }
+@keyframes crtFlicker { 0%{opacity:0.95;} 50%{opacity:1;} 100%{opacity:0.97;} }
 </style>
 </head>
 <body>
 
-<a href="https://maximumreality.xyz/" class="home-btn" title="Go to Maximum Reality Home">🏡</a>
-
+<a href="https://maximumreality.xyz/" class="home-btn">🏡</a>
 
 <div class="arcade-container">
     <h1 class="arcade-header">MAXIMUM REALITY</h1>
     <img src="azul_sitting.png" class="azul-character">
     <img src="arcade.PNG" class="cabinet-shell">
 
-    <div class="button-container">
-        <div id="unmute-btn" class="hotspot" onclick="toggleAudio(false)"></div>
-        <div id="mute-btn" class="hotspot" onclick="toggleAudio(true)"></div>
-    </div>
-
     <div class="screen">
-        <video id="arcadeVideo" class="intro-video" autoplay muted playsinline>
-            <source src="maximum_intro.mp4" type="video/mp4">
-        </video>
         <div class="scanlines"></div>
-
         <div class="credits-container">
             <a href="https://maximumreality.github.io/Abduction/" target="_blank" class="arcade-link">START: ABDUCTION</a>
             <a href="https://maximumreality.github.io/WhiskerBytesCatCafe/" target="_blank" class="arcade-link">GAME: WHISKER BYTES</a>
             <a href="https://maximumreality.github.io/bessara_blast/" target="_blank" class="arcade-link">GAME: BESSARA BLAST</a>
-            <a href="https://maximumreality.github.io/match/" target="_blank" class="arcade-link"
-   style="background: linear-gradient(135deg, #ff00ff, #ff77ff); box-shadow: 0 0 12px rgba(255,0,255,0.6); color:#fff;">
-   GAME: MATCH MODULE
-</a>
+            <a href="https://maximumreality.github.io/match/" target="_blank" class="arcade-link" style="background: linear-gradient(135deg, #ff00ff, #ff77ff);">GAME: MATCH MODULE</a>
             <a href="https://maximumreality.github.io/the_cereal_wars/index.html" target="_blank" class="arcade-link">GAME: THE CEREAL WARS</a>
             <a href="https://maximumreality.github.io/snack_attack/" target="_blank" class="arcade-link">GAME: SNACK ATTACK</a>
             <a href="https://maximumreality.github.io/sphynx-overdrive/" target="_blank" class="arcade-link">GAME: SPHYNX OVERDRIVE</a>
             <a href="https://maximumreality.github.io/pets/" target="_blank" class="arcade-link">GAME: MAXIMUM REALITY PETS</a>
-            <a href="https://maximumreality.github.io/khobz/" target="_blank" class="arcade-link" 
-   style="background: linear-gradient(135deg, #00f3ff, #ffcf00); box-shadow: 0 0 10px rgba(0,243,255,0.6); color:#000;">
-   GAME: THE BUREAUCRACY HEIST
-</a>
+            <a href="https://maximumreality.github.io/khobz/" target="_blank" class="arcade-link" style="background: linear-gradient(135deg, #00f3ff, #ffcf00); color:#000;">GAME: THE BUREAUCRACY HEIST</a>
         </div>
-    </div>
-
-    <div class="arcade-footer">
-        © 2025-2026 LORI SIFUENTES | PART OF THE MAXIMUM REALITY UNIVERSE<br>
-        STAY GLITCHY. NO NICHE, JUST VIBES.
     </div>
 </div>
 
 <script>
-const videoPlaylist = ["maximum_intro.mp4", "abducted.mp4"];
-let currentIdx = 0;
-const player = document.getElementById('arcadeVideo');
+    const screen = document.querySelector('.screen');
+    let isUserScrolling = false;
+    let scrollTimeout;
 
-player.onended = function() {
-    currentIdx = (currentIdx + 1) % videoPlaylist.length;
-    player.src = videoPlaylist[currentIdx];
-    player.play();
-};
-
-function toggleAudio(isMute) {
-    player.muted = isMute;
-    player.play();
-}
-
-   const screen = document.querySelector('.screen');
-let isUserScrolling = false;
-
-// Slow auto-scroll function
-function autoScroll() {
-    if (!isUserScrolling) {
-        screen.scrollTop += 1;
-        // Reset to top if it reaches the bottom
-        if (screen.scrollTop >= (screen.scrollHeight - screen.offsetHeight)) {
-            screen.scrollTop = 0;
+    function autoScroll() {
+        if (!isUserScrolling) {
+            screen.scrollTop += 1;
+            if (screen.scrollTop >= (screen.scrollHeight - screen.offsetHeight)) {
+                screen.scrollTop = 0;
+            }
         }
     }
-}
 
-// Start auto-scroll interval
-let scrollInterval = setInterval(autoScroll, 50);
+    let scrollInterval = setInterval(autoScroll, 40);
 
-// Stop auto-scroll when user touches the screen
-let scrollTimeout;
+    screen.addEventListener('touchstart', () => {
+        isUserScrolling = true;
+        clearInterval(scrollInterval);
+        clearTimeout(scrollTimeout);
+    });
 
-screen.addEventListener('touchstart', () => {
-    isUserScrolling = true;
-    clearInterval(scrollInterval); // Stop auto-scrolling
-    clearTimeout(scrollTimeout);   // Reset the "resume" timer
-});
-
-screen.addEventListener('touchend', () => {
-    // If no one touches the screen for 5 seconds, restart auto-scroll
-    scrollTimeout = setTimeout(() => {
-        isUserScrolling = false;
-        scrollInterval = setInterval(autoScroll, 50);
-    }, 5000); 
-});
-
-
+    screen.addEventListener('touchend', () => {
+        scrollTimeout = setTimeout(() => {
+            isUserScrolling = false;
+            scrollInterval = setInterval(autoScroll, 40);
+        }, 4000); 
+    });
 </script>
 
 </body>
