@@ -97,13 +97,15 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
 }
 
 .credits-container {
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px 0;
-    z-index: 110; 
+    position: relative;
+    z-index: 110;
+    width: 100%;
+    /* No animation here, JS will handle it */
 }
+
 
 .arcade-link {
     color: #ffffff;
@@ -193,33 +195,35 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
 </div>
 
 <script>
-    const screen = document.querySelector('.screen');
-    let isUserScrolling = false;
-    let scrollTimeout;
+    const container = document.querySelector('.credits-container');
+const screenDiv = document.querySelector('.screen');
+let scrollSpeed = 1; 
+let isPaused = false;
 
-    function autoScroll() {
-        if (!isUserScrolling) {
-            screen.scrollTop += 1;
-            if (screen.scrollTop >= (screen.scrollHeight - screen.offsetHeight)) {
-                screen.scrollTop = 0;
-            }
+function loop() {
+    if (!isPaused) {
+        screenDiv.scrollTop += scrollSpeed;
+
+        // If we've scrolled past the first item's height + margin
+        if (screenDiv.scrollTop >= container.firstElementChild.offsetHeight + 16) {
+            // Move the first item to the end of the list
+            container.appendChild(container.firstElementChild);
+            // Reset scroll position so it looks seamless
+            screenDiv.scrollTop -= (container.lastElementChild.offsetHeight + 16);
         }
     }
+    requestAnimationFrame(loop);
+}
 
-    let scrollInterval = setInterval(autoScroll, 40);
+// Start the loop
+loop();
 
-    screen.addEventListener('touchstart', () => {
-        isUserScrolling = true;
-        clearInterval(scrollInterval);
-        clearTimeout(scrollTimeout);
-    });
+// Pause on touch so you can actually click the games!
+screenDiv.addEventListener('touchstart', () => { isPaused = true; });
+screenDiv.addEventListener('touchend', () => { 
+    setTimeout(() => { isPaused = false; }, 2000); 
+});
 
-    screen.addEventListener('touchend', () => {
-        scrollTimeout = setTimeout(() => {
-            isUserScrolling = false;
-            scrollInterval = setInterval(autoScroll, 40);
-        }, 4000); 
-    });
 </script>
 
 </body>
