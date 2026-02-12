@@ -52,7 +52,6 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     z-index: 100;
     border: 2px solid var(--neon-green);
     box-shadow: 0 0 15px var(--neon-pink) inset;
-    animation: pulseGreen 4s ease-in-out infinite alternate;
 }
 
 .screen::-webkit-scrollbar { display: none; }
@@ -78,11 +77,11 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     color: #ffffff;
     text-decoration: none;
     font-size: 0.45rem;
-    margin: 8px auto;
-    padding: 10px;
+    margin: 6px auto;
+    padding: 8px 10px;
     text-align: center;
     display: block;
-    width: 160px;
+    width: 175px;
     background: linear-gradient(135deg, #8b5cf6, #a855f7);
     border-radius: 4px;
     box-shadow: 0 0 10px rgba(168,85,247,0.6);
@@ -92,23 +91,35 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
 
 .arcade-link:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 20px var(--neon-green); transform: scale(1.05); }
 
-/* Home Button - Floating */
+/* Footer */
+.arcade-footer {
+    position: absolute;
+    bottom: -60px;
+    width: 100%;
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.4rem;
+    letter-spacing: 1px;
+    line-height: 1.5;
+    z-index: 300;
+}
+
+/* Home Button - Clean 🏡 */
 .home-btn {
   position: fixed;
-  top: 20px;
-  left: 20px;
+  top: 16px;
+  left: 16px;
   z-index: 2000;
   background: none;
-  font-size: 2rem;
+  color: #fff;
+  font-size: 1.8rem;
   text-decoration: none;
-  filter: drop-shadow(0 0 10px var(--neon-pink));
+  filter: drop-shadow(0 0 8px var(--neon-pink));
   transition: transform 0.2s;
   -webkit-tap-highlight-color: transparent;
 }
-.home-btn:active { transform: scale(1.2); }
 
 @keyframes azulFloat { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(-10px);} }
-@keyframes pulseGreen { 0%{border-color:var(--neon-green);} 100%{border-color:#7fff3f;} }
 @keyframes crtFlicker { 0%{opacity:0.95;} 50%{opacity:1;} 100%{opacity:0.97;} }
 </style>
 </head>
@@ -134,6 +145,11 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
             <a href="https://maximumreality.github.io/pets/" target="_blank" class="arcade-link">GAME: MAXIMUM REALITY PETS</a>
             <a href="https://maximumreality.github.io/khobz/" target="_blank" class="arcade-link" style="background: linear-gradient(135deg, #00f3ff, #ffcf00); color:#000;">GAME: THE BUREAUCRACY HEIST</a>
         </div>
+    </div>
+
+    <div class="arcade-footer">
+        © 2025-2026 LORI SIFUENTES | PART OF THE MAXIMUM REALITY UNIVERSE<br>
+        NO NICHE, JUST VIBES. STAY GLITCHY.
     </div>
 </div>
 
