@@ -58,23 +58,38 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
 }
 
 /* The Animated Neon Floor */
+./* The Animated Neon Floor - BRIGHT VERSION */
 .screen::before {
     content: "";
     position: absolute;
-    top: -20%; /* Adjusted to show more grid */
+    top: -20%; 
     left: -50%;
     width: 200%;
     height: 200%;
+    /* Swapped for solid neon pink with more thickness */
     background-image: 
-        linear-gradient(rgba(255, 0, 255, 0.4) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 0, 255, 0.4) 1px, transparent 1px);
+        linear-gradient(var(--neon-pink) 2px, transparent 2px),
+        linear-gradient(90deg, var(--neon-pink) 2px, transparent 2px);
     background-size: 50px 50px;
     transform: rotateX(65deg);
     transform-origin: center top;
-    /* Combined moving and pulsing animations */
-    animation: gridMove 2s linear infinite, gridPulse 3s ease-in-out infinite;
+    /* Increased pulse speed and intensity */
+    animation: gridMove 1.5s linear infinite, gridPulse 2s ease-in-out infinite;
     z-index: 1;
 }
+
+/* THE BOOSTED PULSE EFFECT */
+@keyframes gridPulse {
+    0%, 100% { 
+        opacity: 0.6; 
+        filter: drop-shadow(0 0 5px var(--neon-pink)) contrast(1.5); 
+    }
+    50% { 
+        opacity: 1; 
+        filter: drop-shadow(0 0 15px var(--neon-pink)) brightness(1.5); 
+    }
+}
+
 
 /* Keep the links on top and flat */
 .credits-container {
@@ -87,11 +102,6 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     transform: translateZ(0); /* Forces links to stay flat */
 }
 
-/* THE PULSE EFFECT */
-@keyframes gridPulse {
-    0%, 100% { opacity: 0.3; filter: drop-shadow(0 0 2px var(--neon-pink)); }
-    50% { opacity: 0.8; filter: drop-shadow(0 0 8px var(--neon-pink)); }
-}
 
 @keyframes gridMove {
     0% { background-position: 0 0; }
