@@ -10,209 +10,122 @@
 
 body { background-color: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Press Start 2P', cursive; overflow: hidden; flex-direction: column; }
 
-.arcade-container { position: relative; width: 95vw; max-width: 800px; }
+/* THE MAIN FRAME */
+.arcade-container { position: relative; width: 95vw; max-width: 800px; display: flex; justify-content: center; align-items: center; }
 
-.cabinet-shell { width: 100%; display: block; position: relative; z-index: 50; pointer-events: none; }
+.cabinet-shell { width: 100%; display: block; position: relative; z-index: 500; pointer-events: none; }
 
 .arcade-header {
     position: absolute;
-    top: -100px;
+    top: -80px;
     width: 100%;
     text-align: center;
     color: #fff;
-    font-size: 1.2rem;
-    text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
-    letter-spacing: 4px;
-    z-index: 30;
+    font-size: 1rem;
+    text-shadow: 0 0 10px var(--neon-pink);
+    z-index: 600;
 }
 
 .azul-character {
     position: absolute;
-    top: -79px;
+    top: -70px;
     left: 50%;
     transform: translateX(-50%);
-    width: 120px;
-    z-index: 40;
-    pointer-events: none;
-    filter: drop-shadow(0 0 10px rgba(57, 255, 20, 0.5));
+    width: 100px;
+    z-index: 700;
     animation: azulFloat 3s ease-in-out infinite;
 }
 
+/* THE SCREEN AREA (Where the magic happens) */
 .screen {
     position: absolute;
-    top: 36.2%;
+    top: 36.2%; /* Alignment for the arcade.PNG */
     left: 14.5%;
     width: 71%;
     height: 32.8%;
     background: #000;
-    overflow-y: auto; 
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    border-radius: 4px;
+    overflow: hidden; /* Keeps links inside the frame */
     z-index: 100;
     border: 2px solid var(--neon-green);
     box-shadow: 0 0 15px var(--neon-pink) inset;
-    perspective: 150px; 
-    overflow: hidden;
 }
 
-/* The Animated Neon Floor - FIXED SYNTAX & BOOSTED BRIGHTNESS */
-.screen::before {
-    content: "";
-    position: absolute;
-    top: -20%; 
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    /* Thicker lines for better visibility */
-    background-image: 
-        linear-gradient(var(--neon-pink) 2.5px, transparent 2.5px),
-        linear-gradient(90deg, var(--neon-pink) 2.5px, transparent 2.5px);
-    background-size: 50px 50px;
-    transform: rotateX(65deg);
-    transform-origin: center top;
-    animation: gridMove 1.5s linear infinite, gridPulse 2s ease-in-out infinite;
-    z-index: 1;
-}
-
-/* THE BOOSTED PULSE EFFECT */
-@keyframes gridPulse {
-    0%, 100% { 
-        opacity: 0.7; 
-        filter: drop-shadow(0 0 5px var(--neon-pink)) contrast(1.5); 
-    }
-    50% { 
-        opacity: 1; 
-        filter: drop-shadow(0 0 20px var(--neon-pink)) brightness(1.8); 
-    }
-}
-
-.scanlines {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
-    background-size: 100% 2px;
-    z-index: 105; 
-    pointer-events: none; 
-}
-
+/* THE SCROLLING CONTAINER */
 .credits-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
-    z-index: 110;
     width: 100%;
-    /* This animation will run forever */
-    animation: infiniteScroll 15s linear infinite;
+    animation: infiniteScroll 20s linear infinite;
 }
-
-/* This is the magic part: it moves the list up and then resets */
-@keyframes infiniteScroll {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-50%); } /* Moves exactly half the list length */
-}
-
-/* Pause on touch so you can click the games! */
-.screen:active .credits-container {
-    animation-play-state: paused;
-}
-
-
 
 .arcade-link {
     color: #ffffff;
     text-decoration: none;
-    font-size: 0.45rem;
-    margin: 8px auto;
-    padding: 10px;
+    font-size: 0.4rem;
+    margin: 10px auto;
+    padding: 12px;
     text-align: center;
     display: block;
-    width: 175px;
+    width: 80%;
     background: linear-gradient(135deg, #8b5cf6, #ff00ff);
     border-radius: 4px;
-    box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
-    transition: all 0.2s ease;
     text-transform: uppercase;
-    letter-spacing: 1px;
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.arcade-link:hover {
-    background: #39ff14; 
-    color: #000;
-    box-shadow: 0 0 20px #39ff14;
-    transform: scale(1.05);
-    border-color: #fff;
+/* INFINITE LOOP LOGIC */
+@keyframes infiniteScroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
 }
 
+/* RE-ADDING YOUR SIGNATURE FOOTER */
 .arcade-footer {
     position: absolute;
     bottom: -60px;
     width: 100%;
     text-align: center;
     color: rgba(255,255,255,0.5);
-    font-size: 0.4rem;
-    letter-spacing: 1px;
-    line-height: 1.5;
-    z-index: 300;
+    font-size: 0.35rem;
+    z-index: 600;
 }
 
-.home-btn {
-  position: fixed;
-  top: 16px;
-  left: 16px;
-  z-index: 2000;
-  background: none;
-  color: #fff;
-  font-size: 1.8rem;
-  text-decoration: none;
-  filter: drop-shadow(0 0 8px var(--neon-pink));
-  transition: transform 0.2s;
-  -webkit-tap-highlight-color: transparent;
-}
-
-@keyframes gridMove { 0% { background-position: 0 0; } 100% { background-position: 0 50px; } }
 @keyframes azulFloat { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(-10px);} }
-@keyframes crtFlicker { 0%{opacity:0.95;} 50%{opacity:1;} 100%{opacity:0.97;} }
 </style>
 </head>
 <body>
-
-<a href="https://maximumreality.xyz/" class="home-btn">🏡</a>
 
 <div class="arcade-container">
     <h1 class="arcade-header">MAXIMUM REALITY</h1>
     <img src="azul_sitting.png" class="azul-character">
     <img src="arcade.PNG" class="cabinet-shell">
 
-    <div class="credits-container">
-    <a href="..." class="arcade-link">START: ABDUCTION</a>
-    <a href="..." class="arcade-link">GAME: WHISKER BYTES</a>
-    <a href="..." class="arcade-link">GAME: BESSARA BLAST</a>
-    <a href="..." class="arcade-link">GAME: MATCH MODULE</a>
-    <a href="..." class="arcade-link">GAME: THE CEREAL WARS</a>
-    <a href="..." class="arcade-link">GAME: SNACK ATTACK</a>
-    <a href="..." class="arcade-link">GAME: SPHYNX OVERDRIVE</a>
-    <a href="..." class="arcade-link">GAME: MAXIMUM REALITY PETS</a>
-    <a href="..." class="arcade-link">GAME: THE BUREAUCRACY HEIST</a>
-
-    <a href="..." class="arcade-link">START: ABDUCTION</a>
-    <a href="..." class="arcade-link">GAME: WHISKER BYTES</a>
-    <a href="..." class="arcade-link">GAME: BESSARA BLAST</a>
-    <a href="..." class="arcade-link">GAME: MATCH MODULE</a>
-    <a href="..." class="arcade-link">GAME: THE CEREAL WARS</a>
-    <a href="..." class="arcade-link">GAME: SNACK ATTACK</a>
-    <a href="..." class="arcade-link">GAME: SPHYNX OVERDRIVE</a>
-    <a href="..." class="arcade-link">GAME: MAXIMUM REALITY PETS</a>
-    <a href="..." class="arcade-link">GAME: THE BUREAUCRACY HEIST</a>
-</div>
-
+    <div class="screen">
+        <div class="credits-container">
+            <a href="https://maximumreality.github.io/Abduction/" class="arcade-link">START: ABDUCTION</a>
+            <a href="https://maximumreality.github.io/WhiskerBytesCatCafe/" class="arcade-link">GAME: WHISKER BYTES</a>
+            <a href="https://maximumreality.github.io/bessara_blast/" class="arcade-link">GAME: BESSARA BLAST</a>
+            <a href="https://maximumreality.github.io/match/" class="arcade-link">GAME: MATCH MODULE</a>
+            <a href="https://maximumreality.github.io/the_cereal_wars/index.html" class="arcade-link">GAME: THE CEREAL WARS</a>
+            <a href="https://maximumreality.github.io/snack_attack/" class="arcade-link">GAME: SNACK ATTACK</a>
+            <a href="https://maximumreality.github.io/sphynx-overdrive/" class="arcade-link">GAME: SPHYNX OVERDRIVE</a>
+            <a href="https://maximumreality.github.io/pets/" class="arcade-link">GAME: MAXIMUM REALITY PETS</a>
+            <a href="https://maximumreality.github.io/khobz/" class="arcade-link">GAME: THE BUREAUCRACY HEIST</a>
+            <a href="https://maximumreality.github.io/Abduction/" class="arcade-link">START: ABDUCTION</a>
+            <a href="https://maximumreality.github.io/WhiskerBytesCatCafe/" class="arcade-link">GAME: WHISKER BYTES</a>
+            <a href="https://maximumreality.github.io/bessara_blast/" class="arcade-link">GAME: BESSARA BLAST</a>
+            <a href="https://maximumreality.github.io/match/" class="arcade-link">GAME: MATCH MODULE</a>
+            <a href="https://maximumreality.github.io/the_cereal_wars/index.html" class="arcade-link">GAME: THE CEREAL WARS</a>
+            <a href="https://maximumreality.github.io/snack_attack/" class="arcade-link">GAME: SNACK ATTACK</a>
+            <a href="https://maximumreality.github.io/sphynx-overdrive/" class="arcade-link">GAME: SPHYNX OVERDRIVE</a>
+            <a href="https://maximumreality.github.io/pets/" class="arcade-link">GAME: MAXIMUM REALITY PETS</a>
+            <a href="https://maximumreality.github.io/khobz/" class="arcade-link">GAME: THE BUREAUCRACY HEIST</a>
+        </div>
     </div>
 
     <div class="arcade-footer">
-        © 2025-2026 LORI SIFUENTES | PART OF THE MAXIMUM REALITY UNIVERSE<br>
-       😺✌️NO NICHE, JUST VIBES. STAY GLITCHY.👽🖖🏻
+        © 2025-2026 LORI SIFUENTES | NO NICHE, JUST VIBES. ✌️
     </div>
 </div>
 
