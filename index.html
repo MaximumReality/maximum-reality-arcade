@@ -103,9 +103,20 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     position: relative;
     z-index: 110;
     width: 100%;
-    padding: 0; /* Reset padding for the clone logic */
+    /* This animation will run forever */
+    animation: infiniteScroll 15s linear infinite;
 }
 
+/* This is the magic part: it moves the list up and then resets */
+@keyframes infiniteScroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); } /* Moves exactly half the list length */
+}
+
+/* Pause on touch so you can click the games! */
+.screen:active .credits-container {
+    animation-play-state: paused;
+}
 
 
 
@@ -175,64 +186,35 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     <img src="azul_sitting.png" class="azul-character">
     <img src="arcade.PNG" class="cabinet-shell">
 
-    <div class="screen">
-        <div class="scanlines"></div>
-        <div class="credits-container">
-            <a href="https://maximumreality.github.io/Abduction/" target="_blank" class="arcade-link">START: ABDUCTION</a>
-            <a href="https://maximumreality.github.io/WhiskerBytesCatCafe/" target="_blank" class="arcade-link">GAME: WHISKER BYTES</a>
-            <a href="https://maximumreality.github.io/bessara_blast/" target="_blank" class="arcade-link">GAME: BESSARA BLAST</a>
-            <a href="https://maximumreality.github.io/match/" target="_blank" class="arcade-link">GAME: MATCH MODULE</a>
-            <a href="https://maximumreality.github.io/the_cereal_wars/index.html" target="_blank" class="arcade-link">GAME: THE CEREAL WARS</a>
-            <a href="https://maximumreality.github.io/snack_attack/" target="_blank" class="arcade-link">GAME: SNACK ATTACK</a>
-            <a href="https://maximumreality.github.io/sphynx-overdrive/" target="_blank" class="arcade-link">GAME: SPHYNX OVERDRIVE</a>
-            <a href="https://maximumreality.github.io/pets/" target="_blank" class="arcade-link">GAME: MAXIMUM REALITY PETS</a>
-            <a href="https://maximumreality.github.io/khobz/" target="_blank" class="arcade-link">GAME: THE BUREAUCRACY HEIST</a>
-        </div>
+    <div class="credits-container">
+    <a href="..." class="arcade-link">START: ABDUCTION</a>
+    <a href="..." class="arcade-link">GAME: WHISKER BYTES</a>
+    <a href="..." class="arcade-link">GAME: BESSARA BLAST</a>
+    <a href="..." class="arcade-link">GAME: MATCH MODULE</a>
+    <a href="..." class="arcade-link">GAME: THE CEREAL WARS</a>
+    <a href="..." class="arcade-link">GAME: SNACK ATTACK</a>
+    <a href="..." class="arcade-link">GAME: SPHYNX OVERDRIVE</a>
+    <a href="..." class="arcade-link">GAME: MAXIMUM REALITY PETS</a>
+    <a href="..." class="arcade-link">GAME: THE BUREAUCRACY HEIST</a>
+
+    <a href="..." class="arcade-link">START: ABDUCTION</a>
+    <a href="..." class="arcade-link">GAME: WHISKER BYTES</a>
+    <a href="..." class="arcade-link">GAME: BESSARA BLAST</a>
+    <a href="..." class="arcade-link">GAME: MATCH MODULE</a>
+    <a href="..." class="arcade-link">GAME: THE CEREAL WARS</a>
+    <a href="..." class="arcade-link">GAME: SNACK ATTACK</a>
+    <a href="..." class="arcade-link">GAME: SPHYNX OVERDRIVE</a>
+    <a href="..." class="arcade-link">GAME: MAXIMUM REALITY PETS</a>
+    <a href="..." class="arcade-link">GAME: THE BUREAUCRACY HEIST</a>
+</div>
+
     </div>
 
     <div class="arcade-footer">
         © 2025-2026 LORI SIFUENTES | PART OF THE MAXIMUM REALITY UNIVERSE<br>
-       😺 NO NICHE, JUST VIBES. STAY GLITCHY. 👽
+       😺✌️NO NICHE, JUST VIBES. STAY GLITCHY.👽🖖🏻
     </div>
 </div>
-
-<script>
-    const screenDiv = document.querySelector('.screen');
-const container = document.querySelector('.credits-container');
-
-// 1. Clone the entire list of games and add it to the bottom 
-// This makes the list double-length so there's never a gap.
-const originalLinks = container.innerHTML;
-container.innerHTML = originalLinks + originalLinks;
-
-let isPaused = false;
-let scrollSpeed = 1;
-
-function autoScroll() {
-    if (!isPaused) {
-        screenDiv.scrollTop += scrollSpeed;
-
-        // If we've scrolled through the first half of the list
-        // (the original set of games), snap back to the start.
-        // It happens so fast the user won't see the jump!
-        if (screenDiv.scrollTop >= container.scrollHeight / 2) {
-            screenDiv.scrollTop = 0;
-        }
-    }
-    requestAnimationFrame(autoScroll);
-}
-
-// Start the waterfall
-autoScroll();
-
-// iPhone Touch Controls - Pause for 3 seconds on tap
-screenDiv.addEventListener('touchstart', () => { isPaused = true; });
-screenDiv.addEventListener('touchend', () => { 
-    setTimeout(() => { isPaused = false; }, 3000); 
-});
-
-
-</script>
 
 </body>
 </html>
