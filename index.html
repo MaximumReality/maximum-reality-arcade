@@ -6,89 +6,72 @@
 <title>MAXIMUM REALITY</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
-:root { --neon-pink: #ff00ff; --neon-cyan: #00ffff; --neon-green: #39ff14; }
+/* THE STACKING ORDER (Z-INDEX) */
+/* 1. Grid (Background) - z-index: 1 */
+/* 2. Links (Middle) - z-index: 10 */
+/* 3. Azul (Behind the Top) - z-index: 20 */
+/* 4. Cabinet Shell (The Frame) - z-index: 30 */
 
-body { background-color: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Press Start 2P', cursive; overflow: hidden; }
-
-/* THE WRAPPER - This keeps everything centered */
 .arcade-wrapper {
     position: relative;
     width: 95vw;
-    max-width: 500px; /* Adjusted for better phone fit */
+    max-width: 500px;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
-/* THE CABINET - High Z-index to stay on TOP */
 .cabinet-shell {
     width: 100%;
-    height: auto;
-    z-index: 1000;
-    pointer-events: none; /* Allows you to click through the plastic to the games */
+    z-index: 30; /* The Frame on top */
+    pointer-events: none;
     position: relative;
 }
 
-/* AZUL - Perched on top */
 .azul-character {
     position: absolute;
-    top: -12%;
+    top: -65px; /* Adjust so he peeks from behind the sign */
     left: 50%;
     transform: translateX(-50%);
-    width: 25%;
-    z-index: 1100;
+    width: 120px;
+    z-index: 20; /* Tucked behind the cabinet plastic */
     animation: azulFloat 3s ease-in-out infinite;
 }
 
-/* THE SCREEN AREA - Trapped behind the cabinet */
 .screen-area {
     position: absolute;
-    top: 36.2%;
+    top: 36.3%;
     left: 14.8%;
-    width: 70.5%;
-    height: 32.5%;
+    width: 70.4%;
+    height: 32.4%;
     background: #000;
-    z-index: 100; /* Behind cabinet */
+    z-index: 5; /* Inside the cabinet */
     overflow: hidden;
-    border-radius: 5px;
 }
 
-/* THE SCROLLING LIST */
+/* THE NEON GRID - Now visible inside the screen */
+.screen-area::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+        linear-gradient(var(--neon-pink) 1px, transparent 1px),
+        linear-gradient(90deg, var(--neon-pink) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.5;
+    z-index: 1;
+}
+
 .credits-container {
+    position: relative;
+    z-index: 10; /* Above the grid, below the cabinet */
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    animation: infiniteScroll 25s linear infinite;
+    animation: infiniteScroll 20s linear infinite;
 }
-
-.arcade-link {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 0.4rem;
-    margin: 8px 0;
-    padding: 12px;
-    text-align: center;
-    display: block;
-    width: 85%;
-    background: linear-gradient(135deg, #8b5cf6, #ff00ff);
-    border-radius: 4px;
-    text-transform: uppercase;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* INFINITE LOOP */
-@keyframes infiniteScroll {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-50%); }
-}
-
-/* HEADER & FOOTER */
-.arcade-header { position: absolute; top: -20%; color: #fff; font-size: 0.8rem; text-shadow: 0 0 10px var(--neon-pink); z-index: 1200; }
-.arcade-footer { position: absolute; bottom: -10%; color: rgba(255,255,255,0.4); font-size: 0.35rem; text-align: center; width: 100%; z-index: 1200; }
-
-@keyframes azulFloat { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(-10px);} }
 </style>
+
 </head>
 <body>
 
