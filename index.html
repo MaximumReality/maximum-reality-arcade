@@ -6,91 +6,99 @@
 <title>MAXIMUM REALITY</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
-/* THE STACKING ORDER (Z-INDEX) */
-/* 1. Grid (Background) - z-index: 1 */
-/* 2. Links (Middle) - z-index: 10 */
-/* 3. Azul (Behind the Top) - z-index: 20 */
-/* 4. Cabinet Shell (The Frame) - z-index: 30 */
+:root { --neon-pink: #ff00ff; --neon-cyan: #00ffff; --neon-green: #39ff14; }
 
-.arcade-wrapper {
-    position: relative;
-    width: 95vw;
-    max-width: 500px;
-    display: flex;
-    justify-content: center;
-}
+body { background-color: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Press Start 2P', cursive; overflow: hidden; flex-direction: column; }
 
-.cabinet-shell {
-    width: 100%;
-    z-index: 30; /* The Frame on top */
-    pointer-events: none;
-    position: relative;
-}
+.arcade-container { position: relative; width: 95vw; max-width: 800px; }
 
+/* THE CABINET - Z-INDEX 50 */
+.cabinet-shell { width: 100%; display: block; position: relative; z-index: 50; pointer-events: none; }
+
+/* AZUL - Z-INDEX 40 (PEEKING BEHIND) */
 .azul-character {
     position: absolute;
-    top: -65px; /* Adjust so he peeks from behind the sign */
+    top: -85px; /* High up as requested */
     left: 50%;
     transform: translateX(-50%);
     width: 120px;
-    z-index: 20; /* Tucked behind the cabinet plastic */
+    z-index: 40; /* Lower than cabinet shell (50) */
+    pointer-events: none;
     animation: azulFloat 3s ease-in-out infinite;
 }
 
-.screen-area {
+/* THE SCREEN */
+.screen {
     position: absolute;
-    top: 36.3%;
-    left: 14.8%;
-    width: 70.4%;
-    height: 32.4%;
+    top: 36.2%;
+    left: 14.5%;
+    width: 71%;
+    height: 32.8%;
     background: #000;
-    z-index: 5; /* Inside the cabinet */
-    overflow: hidden;
+    overflow-y: auto; 
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    border-radius: 4px;
+    z-index: 100;
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 15px var(--neon-pink) inset;
 }
 
-/* THE NEON GRID - Now visible inside the screen */
-.screen-area::before {
+/* THE GRID BACKGROUND */
+.screen::before {
     content: "";
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    position: fixed; /* Keep it still while text scrolls */
+    top: 36.2%; left: 14.5%; width: 71%; height: 32.8%;
     background-image: 
-        linear-gradient(var(--neon-pink) 1px, transparent 1px),
-        linear-gradient(90deg, var(--neon-pink) 1px, transparent 1px);
+        linear-gradient(rgba(255, 0, 255, 0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 0, 255, 0.3) 1px, transparent 1px);
     background-size: 30px 30px;
-    opacity: 0.5;
-    z-index: 1;
+    z-index: -1;
 }
 
 .credits-container {
-    position: relative;
-    z-index: 10; /* Above the grid, below the cabinet */
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    animation: infiniteScroll 20s linear infinite;
+    padding: 20px 0 300px 0; /* Extra bottom padding for the waterfall */
 }
-</style>
 
+.arcade-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.45rem;
+    margin: 8px auto;
+    padding: 10px;
+    text-align: center;
+    display: block;
+    width: 175px;
+    background: linear-gradient(135deg, #8b5cf6, #ff00ff);
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.arcade-footer {
+    position: absolute;
+    bottom: -60px;
+    width: 100%;
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.4rem;
+}
+
+@keyframes azulFloat { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(-10px);} }
+</style>
 </head>
 <body>
 
-<div class="arcade-wrapper">
-    <h1 class="arcade-header">MAXIMUM REALITY</h1>
+<div class="arcade-container">
     <img src="azul_sitting.png" class="azul-character">
     <img src="arcade.PNG" class="cabinet-shell">
 
-    <div class="screen-area">
+    <div class="screen">
         <div class="credits-container">
-            <a href="https://maximumreality.github.io/Abduction/" target="_blank" class="arcade-link">START: ABDUCTION</a>
-            <a href="https://maximumreality.github.io/WhiskerBytesCatCafe/" target="_blank" class="arcade-link">GAME: WHISKER BYTES</a>
-            <a href="https://maximumreality.github.io/bessara_blast/" target="_blank" class="arcade-link">GAME: BESSARA BLAST</a>
-            <a href="https://maximumreality.github.io/match/" target="_blank" class="arcade-link">GAME: MATCH MODULE</a>
-            <a href="https://maximumreality.github.io/the_cereal_wars/index.html" target="_blank" class="arcade-link">GAME: THE CEREAL WARS</a>
-            <a href="https://maximumreality.github.io/snack_attack/" target="_blank" class="arcade-link">GAME: SNACK ATTACK</a>
-            <a href="https://maximumreality.github.io/sphynx-overdrive/" target="_blank" class="arcade-link">GAME: SPHYNX OVERDRIVE</a>
-            <a href="https://maximumreality.github.io/pets/" target="_blank" class="arcade-link">GAME: MAXIMUM REALITY PETS</a>
-            <a href="https://maximumreality.github.io/khobz/" target="_blank" class="arcade-link">GAME: THE BUREAUCRACY HEIST</a>
             <a href="https://maximumreality.github.io/Abduction/" target="_blank" class="arcade-link">START: ABDUCTION</a>
             <a href="https://maximumreality.github.io/WhiskerBytesCatCafe/" target="_blank" class="arcade-link">GAME: WHISKER BYTES</a>
             <a href="https://maximumreality.github.io/bessara_blast/" target="_blank" class="arcade-link">GAME: BESSARA BLAST</a>
@@ -104,9 +112,33 @@
     </div>
 
     <div class="arcade-footer">
-        © 2025-2026 LORI SIFUENTES | NO NICHE, JUST VIBES. 🎱
+        © 2025-2026 LORI SIFUENTES | NO NICHE, JUST VIBES. 👾
     </div>
 </div>
+
+<script>
+    const screen = document.querySelector('.screen');
+    const container = document.querySelector('.credits-container');
+    let isPaused = false;
+
+    function waterfall() {
+        if (!isPaused) {
+            screen.scrollTop += 1;
+            // If we hit the end of the list, snap back to top
+            if (screen.scrollTop >= (container.scrollHeight - screen.offsetHeight)) {
+                screen.scrollTop = 0;
+            }
+        }
+        requestAnimationFrame(waterfall);
+    }
+
+    waterfall();
+
+    screen.addEventListener('touchstart', () => { isPaused = true; });
+    screen.addEventListener('touchend', () => { 
+        setTimeout(() => { isPaused = false; }, 3000); 
+    });
+</script>
 
 </body>
 </html>
