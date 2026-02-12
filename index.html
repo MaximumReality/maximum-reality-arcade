@@ -103,10 +103,9 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     position: relative;
     z-index: 110;
     width: 100%;
-    /* Double the bottom padding to ensure the list feels 'long' */
-    padding-top: 20px;
-    padding-bottom: 300px; 
+    padding: 0; /* Reset padding for the clone logic */
 }
+
 
 
 
@@ -193,13 +192,19 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
 
     <div class="arcade-footer">
         © 2025-2026 LORI SIFUENTES | PART OF THE MAXIMUM REALITY UNIVERSE<br>
-        NO NICHE, JUST VIBES. STAY GLITCHY. 👽🫶🏻
+       😺 NO NICHE, JUST VIBES. STAY GLITCHY. 👽
     </div>
 </div>
 
 <script>
     const screenDiv = document.querySelector('.screen');
 const container = document.querySelector('.credits-container');
+
+// 1. Clone the entire list of games and add it to the bottom 
+// This makes the list double-length so there's never a gap.
+const originalLinks = container.innerHTML;
+container.innerHTML = originalLinks + originalLinks;
+
 let isPaused = false;
 let scrollSpeed = 1;
 
@@ -207,16 +212,11 @@ function autoScroll() {
     if (!isPaused) {
         screenDiv.scrollTop += scrollSpeed;
 
-        // Check if the first game has scrolled out of view
-        const firstGame = container.firstElementChild;
-        if (firstGame) {
-            const gameHeight = firstGame.offsetHeight + 16; // height + margin
-            if (screenDiv.scrollTop >= gameHeight) {
-                // Move the first game to the bottom of the list
-                container.appendChild(firstGame);
-                // Adjust scroll so the jump is invisible
-                screenDiv.scrollTop -= gameHeight;
-            }
+        // If we've scrolled through the first half of the list
+        // (the original set of games), snap back to the start.
+        // It happens so fast the user won't see the jump!
+        if (screenDiv.scrollTop >= container.scrollHeight / 2) {
+            screenDiv.scrollTop = 0;
         }
     }
     requestAnimationFrame(autoScroll);
@@ -225,11 +225,12 @@ function autoScroll() {
 // Start the waterfall
 autoScroll();
 
-// iPhone Touch Controls
+// iPhone Touch Controls - Pause for 3 seconds on tap
 screenDiv.addEventListener('touchstart', () => { isPaused = true; });
 screenDiv.addEventListener('touchend', () => { 
-    setTimeout(() => { isPaused = false; }, 2000); 
+    setTimeout(() => { isPaused = false; }, 3000); 
 });
+
 
 </script>
 
