@@ -103,8 +103,11 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     position: relative;
     z-index: 110;
     width: 100%;
-    /* No animation here, JS will handle it */
+    /* Double the bottom padding to ensure the list feels 'long' */
+    padding-top: 20px;
+    padding-bottom: 300px; 
 }
+
 
 
 .arcade-link {
@@ -190,35 +193,39 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
 
     <div class="arcade-footer">
         © 2025-2026 LORI SIFUENTES | PART OF THE MAXIMUM REALITY UNIVERSE<br>
-        NO NICHE, JUST VIBES. STAY GLITCHY. ✌️
+        NO NICHE, JUST VIBES. STAY GLITCHY. 👽🫶🏻
     </div>
 </div>
 
 <script>
-    const container = document.querySelector('.credits-container');
-const screenDiv = document.querySelector('.screen');
-let scrollSpeed = 1; 
+    const screenDiv = document.querySelector('.screen');
+const container = document.querySelector('.credits-container');
 let isPaused = false;
+let scrollSpeed = 1;
 
-function loop() {
+function autoScroll() {
     if (!isPaused) {
         screenDiv.scrollTop += scrollSpeed;
 
-        // If we've scrolled past the first item's height + margin
-        if (screenDiv.scrollTop >= container.firstElementChild.offsetHeight + 16) {
-            // Move the first item to the end of the list
-            container.appendChild(container.firstElementChild);
-            // Reset scroll position so it looks seamless
-            screenDiv.scrollTop -= (container.lastElementChild.offsetHeight + 16);
+        // Check if the first game has scrolled out of view
+        const firstGame = container.firstElementChild;
+        if (firstGame) {
+            const gameHeight = firstGame.offsetHeight + 16; // height + margin
+            if (screenDiv.scrollTop >= gameHeight) {
+                // Move the first game to the bottom of the list
+                container.appendChild(firstGame);
+                // Adjust scroll so the jump is invisible
+                screenDiv.scrollTop -= gameHeight;
+            }
         }
     }
-    requestAnimationFrame(loop);
+    requestAnimationFrame(autoScroll);
 }
 
-// Start the loop
-loop();
+// Start the waterfall
+autoScroll();
 
-// Pause on touch so you can actually click the games!
+// iPhone Touch Controls
 screenDiv.addEventListener('touchstart', () => { isPaused = true; });
 screenDiv.addEventListener('touchend', () => { 
     setTimeout(() => { isPaused = false; }, 2000); 
