@@ -8,124 +8,120 @@
 <style>
 :root { --neon-pink: #ff00ff; --neon-cyan: #00ffff; --neon-green: #39ff14; }
 
-body { background-color: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Press Start 2P', cursive; overflow: hidden; flex-direction: column; }
+body { background-color: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Press Start 2P', cursive; overflow: hidden; }
 
-/* THE MAIN FRAME */
-.arcade-container { position: relative; width: 95vw; max-width: 800px; display: flex; justify-content: center; align-items: center; }
-
-.cabinet-shell { width: 100%; display: block; position: relative; z-index: 500; pointer-events: none; }
-
-.arcade-header {
-    position: absolute;
-    top: -80px;
-    width: 100%;
-    text-align: center;
-    color: #fff;
-    font-size: 1rem;
-    text-shadow: 0 0 10px var(--neon-pink);
-    z-index: 600;
+/* THE WRAPPER - This keeps everything centered */
+.arcade-wrapper {
+    position: relative;
+    width: 95vw;
+    max-width: 500px; /* Adjusted for better phone fit */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+/* THE CABINET - High Z-index to stay on TOP */
+.cabinet-shell {
+    width: 100%;
+    height: auto;
+    z-index: 1000;
+    pointer-events: none; /* Allows you to click through the plastic to the games */
+    position: relative;
+}
+
+/* AZUL - Perched on top */
 .azul-character {
     position: absolute;
-    top: -70px;
+    top: -12%;
     left: 50%;
     transform: translateX(-50%);
-    width: 100px;
-    z-index: 700;
+    width: 25%;
+    z-index: 1100;
     animation: azulFloat 3s ease-in-out infinite;
 }
 
-/* THE SCREEN AREA (Where the magic happens) */
-.screen {
+/* THE SCREEN AREA - Trapped behind the cabinet */
+.screen-area {
     position: absolute;
-    top: 36.2%; /* Alignment for the arcade.PNG */
-    left: 14.5%;
-    width: 71%;
-    height: 32.8%;
+    top: 36.2%;
+    left: 14.8%;
+    width: 70.5%;
+    height: 32.5%;
     background: #000;
-    overflow: hidden; /* Keeps links inside the frame */
-    z-index: 100;
-    border: 2px solid var(--neon-green);
-    box-shadow: 0 0 15px var(--neon-pink) inset;
+    z-index: 100; /* Behind cabinet */
+    overflow: hidden;
+    border-radius: 5px;
 }
 
-/* THE SCROLLING CONTAINER */
+/* THE SCROLLING LIST */
 .credits-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    animation: infiniteScroll 20s linear infinite;
+    animation: infiniteScroll 25s linear infinite;
 }
 
 .arcade-link {
     color: #ffffff;
     text-decoration: none;
     font-size: 0.4rem;
-    margin: 10px auto;
+    margin: 8px 0;
     padding: 12px;
     text-align: center;
     display: block;
-    width: 80%;
+    width: 85%;
     background: linear-gradient(135deg, #8b5cf6, #ff00ff);
     border-radius: 4px;
     text-transform: uppercase;
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* INFINITE LOOP LOGIC */
+/* INFINITE LOOP */
 @keyframes infiniteScroll {
     0% { transform: translateY(0); }
     100% { transform: translateY(-50%); }
 }
 
-/* RE-ADDING YOUR SIGNATURE FOOTER */
-.arcade-footer {
-    position: absolute;
-    bottom: -60px;
-    width: 100%;
-    text-align: center;
-    color: rgba(255,255,255,0.5);
-    font-size: 0.35rem;
-    z-index: 600;
-}
+/* HEADER & FOOTER */
+.arcade-header { position: absolute; top: -20%; color: #fff; font-size: 0.8rem; text-shadow: 0 0 10px var(--neon-pink); z-index: 1200; }
+.arcade-footer { position: absolute; bottom: -10%; color: rgba(255,255,255,0.4); font-size: 0.35rem; text-align: center; width: 100%; z-index: 1200; }
 
 @keyframes azulFloat { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(-10px);} }
 </style>
 </head>
 <body>
 
-<div class="arcade-container">
+<div class="arcade-wrapper">
     <h1 class="arcade-header">MAXIMUM REALITY</h1>
     <img src="azul_sitting.png" class="azul-character">
     <img src="arcade.PNG" class="cabinet-shell">
 
-    <div class="screen">
+    <div class="screen-area">
         <div class="credits-container">
-            <a href="https://maximumreality.github.io/Abduction/" class="arcade-link">START: ABDUCTION</a>
-            <a href="https://maximumreality.github.io/WhiskerBytesCatCafe/" class="arcade-link">GAME: WHISKER BYTES</a>
-            <a href="https://maximumreality.github.io/bessara_blast/" class="arcade-link">GAME: BESSARA BLAST</a>
-            <a href="https://maximumreality.github.io/match/" class="arcade-link">GAME: MATCH MODULE</a>
-            <a href="https://maximumreality.github.io/the_cereal_wars/index.html" class="arcade-link">GAME: THE CEREAL WARS</a>
-            <a href="https://maximumreality.github.io/snack_attack/" class="arcade-link">GAME: SNACK ATTACK</a>
-            <a href="https://maximumreality.github.io/sphynx-overdrive/" class="arcade-link">GAME: SPHYNX OVERDRIVE</a>
-            <a href="https://maximumreality.github.io/pets/" class="arcade-link">GAME: MAXIMUM REALITY PETS</a>
-            <a href="https://maximumreality.github.io/khobz/" class="arcade-link">GAME: THE BUREAUCRACY HEIST</a>
-            <a href="https://maximumreality.github.io/Abduction/" class="arcade-link">START: ABDUCTION</a>
-            <a href="https://maximumreality.github.io/WhiskerBytesCatCafe/" class="arcade-link">GAME: WHISKER BYTES</a>
-            <a href="https://maximumreality.github.io/bessara_blast/" class="arcade-link">GAME: BESSARA BLAST</a>
-            <a href="https://maximumreality.github.io/match/" class="arcade-link">GAME: MATCH MODULE</a>
-            <a href="https://maximumreality.github.io/the_cereal_wars/index.html" class="arcade-link">GAME: THE CEREAL WARS</a>
-            <a href="https://maximumreality.github.io/snack_attack/" class="arcade-link">GAME: SNACK ATTACK</a>
-            <a href="https://maximumreality.github.io/sphynx-overdrive/" class="arcade-link">GAME: SPHYNX OVERDRIVE</a>
-            <a href="https://maximumreality.github.io/pets/" class="arcade-link">GAME: MAXIMUM REALITY PETS</a>
-            <a href="https://maximumreality.github.io/khobz/" class="arcade-link">GAME: THE BUREAUCRACY HEIST</a>
+            <a href="https://maximumreality.github.io/Abduction/" target="_blank" class="arcade-link">START: ABDUCTION</a>
+            <a href="https://maximumreality.github.io/WhiskerBytesCatCafe/" target="_blank" class="arcade-link">GAME: WHISKER BYTES</a>
+            <a href="https://maximumreality.github.io/bessara_blast/" target="_blank" class="arcade-link">GAME: BESSARA BLAST</a>
+            <a href="https://maximumreality.github.io/match/" target="_blank" class="arcade-link">GAME: MATCH MODULE</a>
+            <a href="https://maximumreality.github.io/the_cereal_wars/index.html" target="_blank" class="arcade-link">GAME: THE CEREAL WARS</a>
+            <a href="https://maximumreality.github.io/snack_attack/" target="_blank" class="arcade-link">GAME: SNACK ATTACK</a>
+            <a href="https://maximumreality.github.io/sphynx-overdrive/" target="_blank" class="arcade-link">GAME: SPHYNX OVERDRIVE</a>
+            <a href="https://maximumreality.github.io/pets/" target="_blank" class="arcade-link">GAME: MAXIMUM REALITY PETS</a>
+            <a href="https://maximumreality.github.io/khobz/" target="_blank" class="arcade-link">GAME: THE BUREAUCRACY HEIST</a>
+            <a href="https://maximumreality.github.io/Abduction/" target="_blank" class="arcade-link">START: ABDUCTION</a>
+            <a href="https://maximumreality.github.io/WhiskerBytesCatCafe/" target="_blank" class="arcade-link">GAME: WHISKER BYTES</a>
+            <a href="https://maximumreality.github.io/bessara_blast/" target="_blank" class="arcade-link">GAME: BESSARA BLAST</a>
+            <a href="https://maximumreality.github.io/match/" target="_blank" class="arcade-link">GAME: MATCH MODULE</a>
+            <a href="https://maximumreality.github.io/the_cereal_wars/index.html" target="_blank" class="arcade-link">GAME: THE CEREAL WARS</a>
+            <a href="https://maximumreality.github.io/snack_attack/" target="_blank" class="arcade-link">GAME: SNACK ATTACK</a>
+            <a href="https://maximumreality.github.io/sphynx-overdrive/" target="_blank" class="arcade-link">GAME: SPHYNX OVERDRIVE</a>
+            <a href="https://maximumreality.github.io/pets/" target="_blank" class="arcade-link">GAME: MAXIMUM REALITY PETS</a>
+            <a href="https://maximumreality.github.io/khobz/" target="_blank" class="arcade-link">GAME: THE BUREAUCRACY HEIST</a>
         </div>
     </div>
 
     <div class="arcade-footer">
-        © 2025-2026 LORI SIFUENTES | NO NICHE, JUST VIBES. ✌️
+        © 2025-2026 LORI SIFUENTES | NO NICHE, JUST VIBES. 🎱
     </div>
 </div>
 
