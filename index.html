@@ -52,13 +52,11 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     z-index: 100;
     border: 2px solid var(--neon-green);
     box-shadow: 0 0 15px var(--neon-pink) inset;
-    /* Create 3D space for the background */
     perspective: 150px; 
     overflow: hidden;
 }
 
-/* The Animated Neon Floor */
-./* The Animated Neon Floor - BRIGHT VERSION */
+/* The Animated Neon Floor - FIXED SYNTAX & BOOSTED BRIGHTNESS */
 .screen::before {
     content: "";
     position: absolute;
@@ -66,14 +64,13 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     left: -50%;
     width: 200%;
     height: 200%;
-    /* Swapped for solid neon pink with more thickness */
+    /* Thicker lines for better visibility */
     background-image: 
-        linear-gradient(var(--neon-pink) 2px, transparent 2px),
-        linear-gradient(90deg, var(--neon-pink) 2px, transparent 2px);
+        linear-gradient(var(--neon-pink) 2.5px, transparent 2.5px),
+        linear-gradient(90deg, var(--neon-pink) 2.5px, transparent 2.5px);
     background-size: 50px 50px;
     transform: rotateX(65deg);
     transform-origin: center top;
-    /* Increased pulse speed and intensity */
     animation: gridMove 1.5s linear infinite, gridPulse 2s ease-in-out infinite;
     z-index: 1;
 }
@@ -81,55 +78,31 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
 /* THE BOOSTED PULSE EFFECT */
 @keyframes gridPulse {
     0%, 100% { 
-        opacity: 0.6; 
+        opacity: 0.7; 
         filter: drop-shadow(0 0 5px var(--neon-pink)) contrast(1.5); 
     }
     50% { 
         opacity: 1; 
-        filter: drop-shadow(0 0 15px var(--neon-pink)) brightness(1.5); 
+        filter: drop-shadow(0 0 20px var(--neon-pink)) brightness(1.8); 
     }
 }
-
-
-/* Keep the links on top and flat */
-.credits-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px 0;
-    z-index: 110; /* Higher than the grid (1) */
-    transform: translateZ(0); /* Forces links to stay flat */
-}
-
-
-@keyframes gridMove {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 50px; }
-}
-
-
-    
 
 .scanlines {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    /* REMOVED: The heavy top/bottom black gradients */
-    /* UPDATED: Thinner lines (2px) for a sharper look */
     background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
     background-size: 100% 2px;
     z-index: 105; 
     pointer-events: none; 
 }
 
-
-
 .credits-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 30px 0;
-    z-index: 110;
+    z-index: 110; 
 }
 
 .arcade-link {
@@ -141,7 +114,6 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     text-align: center;
     display: block;
     width: 175px;
-    /* Unified Purple/Magenta Gradient */
     background: linear-gradient(135deg, #8b5cf6, #ff00ff);
     border-radius: 4px;
     box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
@@ -152,15 +124,13 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
 }
 
 .arcade-link:hover {
-    background: #39ff14; /* Turns Neon Green on hover/tap */
+    background: #39ff14; 
     color: #000;
     box-shadow: 0 0 20px #39ff14;
     transform: scale(1.05);
     border-color: #fff;
 }
 
-
-/* Footer */
 .arcade-footer {
     position: absolute;
     bottom: -60px;
@@ -173,7 +143,6 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     z-index: 300;
 }
 
-/* Home Button - Clean 🏡 */
 .home-btn {
   position: fixed;
   top: 16px;
@@ -188,6 +157,7 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
   -webkit-tap-highlight-color: transparent;
 }
 
+@keyframes gridMove { 0% { background-position: 0 0; } 100% { background-position: 0 50px; } }
 @keyframes azulFloat { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(-10px);} }
 @keyframes crtFlicker { 0%{opacity:0.95;} 50%{opacity:1;} 100%{opacity:0.97;} }
 </style>
@@ -204,17 +174,16 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     <div class="screen">
         <div class="scanlines"></div>
         <div class="credits-container">
-    <a href="https://maximumreality.github.io/Abduction/" target="_blank" class="arcade-link">START: ABDUCTION</a>
-    <a href="https://maximumreality.github.io/WhiskerBytesCatCafe/" target="_blank" class="arcade-link">GAME: WHISKER BYTES</a>
-    <a href="https://maximumreality.github.io/bessara_blast/" target="_blank" class="arcade-link">GAME: BESSARA BLAST</a>
-    <a href="https://maximumreality.github.io/match/" target="_blank" class="arcade-link">GAME: MATCH MODULE</a>
-    <a href="https://maximumreality.github.io/the_cereal_wars/index.html" target="_blank" class="arcade-link">GAME: THE CEREAL WARS</a>
-    <a href="https://maximumreality.github.io/snack_attack/" target="_blank" class="arcade-link">GAME: SNACK ATTACK</a>
-    <a href="https://maximumreality.github.io/sphynx-overdrive/" target="_blank" class="arcade-link">GAME: SPHYNX OVERDRIVE</a>
-    <a href="https://maximumreality.github.io/pets/" target="_blank" class="arcade-link">GAME: MAXIMUM REALITY PETS</a>
-    <a href="https://maximumreality.github.io/khobz/" target="_blank" class="arcade-link">GAME: THE BUREAUCRACY HEIST</a>
-</div>
-
+            <a href="https://maximumreality.github.io/Abduction/" target="_blank" class="arcade-link">START: ABDUCTION</a>
+            <a href="https://maximumreality.github.io/WhiskerBytesCatCafe/" target="_blank" class="arcade-link">GAME: WHISKER BYTES</a>
+            <a href="https://maximumreality.github.io/bessara_blast/" target="_blank" class="arcade-link">GAME: BESSARA BLAST</a>
+            <a href="https://maximumreality.github.io/match/" target="_blank" class="arcade-link">GAME: MATCH MODULE</a>
+            <a href="https://maximumreality.github.io/the_cereal_wars/index.html" target="_blank" class="arcade-link">GAME: THE CEREAL WARS</a>
+            <a href="https://maximumreality.github.io/snack_attack/" target="_blank" class="arcade-link">GAME: SNACK ATTACK</a>
+            <a href="https://maximumreality.github.io/sphynx-overdrive/" target="_blank" class="arcade-link">GAME: SPHYNX OVERDRIVE</a>
+            <a href="https://maximumreality.github.io/pets/" target="_blank" class="arcade-link">GAME: MAXIMUM REALITY PETS</a>
+            <a href="https://maximumreality.github.io/khobz/" target="_blank" class="arcade-link">GAME: THE BUREAUCRACY HEIST</a>
+        </div>
     </div>
 
     <div class="arcade-footer">
