@@ -1,2 +1,2 @@
 # maximum-reality-arcade
-Jumping off point for links 
+Jumping off point for links to games
