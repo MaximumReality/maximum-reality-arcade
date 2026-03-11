@@ -199,6 +199,19 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
         setTimeout(() => { isPaused = false; }, 4000); 
     });
 </script>
+    <script>
+const arcadeLinks = document.querySelectorAll('.arcade-link');
+const arcadeSound = new Audio('funny-arcade-game.mp3');
+
+arcadeLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        arcadeSound.currentTime = 0; // rewind so it plays from start
+        arcadeSound.play().catch(() => {
+            console.log("Tap detected, waiting for user interaction.");
+        });
+    });
+});
+</script>
 
 </body>
 </html>
