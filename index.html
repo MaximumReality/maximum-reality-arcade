@@ -34,7 +34,7 @@
 
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=430, height=932, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>MAXIMUM REALITY</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
@@ -133,13 +133,6 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-    .arcade-container {
-  width: 430px;
-  height: 932px;
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
-}
 .arcade-footer {
     position: absolute;
     bottom: -60px;
@@ -186,8 +179,7 @@ body { background-color: #000; margin: 0; display: flex; justify-content: center
             
         </div>
     </div>
-<!-- SOUND BUTTON -->
-<button id="sound-btn">🔊 SOUND</button>
+
     <div class="arcade-footer">
       ✨  © 2025-2026 LORI SIFUENTES | NO NICHE, JUST VIBES. ✨
     </div>
@@ -225,46 +217,6 @@ arcadeLinks.forEach(link => {
             console.log("Tap detected, waiting for user interaction.");
         });
     });
-});
-</script>
-    <style>
-#sound-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  z-index: 500;
-  background: linear-gradient(135deg, #8b5cf6, #ff00ff);
-  border: 1px solid #fff3;
-  border-radius: 6px;
-  padding: 6px 10px;
-  font-size: 0.5rem;
-  color: #fff;
-  text-transform: uppercase;
-  cursor: pointer;
-  box-shadow: 0 0 8px #ff00ff66;
-}
-#sound-btn:active {
-  transform: scale(0.95);
-  box-shadow: 0 0 4px #ff00ff66 inset;
-}
-</style>
-
-<script>
-const arcadeSound = new Audio('funny-arcade-game.mp3');
-arcadeSound.loop = true;
-
-const soundBtn = document.getElementById('sound-btn');
-let isPlaying = false;
-
-soundBtn.addEventListener('click', () => {
-    if (!isPlaying) {
-        arcadeSound.play().catch(() => console.log("Tap required to start audio."));
-        soundBtn.textContent = "🔇 SOUND OFF";
-    } else {
-        arcadeSound.pause();
-        soundBtn.textContent = "🔊 SOUND";
-    }
-    isPlaying = !isPlaying;
 });
 </script>
 
